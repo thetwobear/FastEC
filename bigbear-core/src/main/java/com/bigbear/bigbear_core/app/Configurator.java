@@ -1,7 +1,5 @@
 package com.bigbear.bigbear_core.app;
 
-import android.support.v4.app.INotificationSideChannel;
-
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
