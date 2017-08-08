@@ -18,4 +18,8 @@ public final class BigBear {
     public static HashMap<String, Object> getConfigurations() {
         return Configurator.getInstance().getConfigs();
     }
+
+    public static Context getApplication(){
+        return (Context) Configurator.getInstance().getConfigs().get(ConfigType.APPLICATION_CONTEXT.name());
+    }
 }
