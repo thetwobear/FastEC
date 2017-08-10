@@ -11,15 +11,15 @@ import java.util.HashMap;
 public final class BigBear {
 
     public static Configurator init(Context context) {
-        getConfigurations().put(ConfigType.APPLICATION_CONTEXT.name(), context.getApplicationContext());
+        getConfigurations().put(ConfigType.APPLICATION_CONTEXT, context.getApplicationContext());
         return Configurator.getInstance();
     }
 
-    public static HashMap<String, Object> getConfigurations() {
+    public static HashMap<Object, Object> getConfigurations() {
         return Configurator.getInstance().getConfigs();
     }
 
     public static Context getApplication(){
-        return (Context) Configurator.getInstance().getConfigs().get(ConfigType.APPLICATION_CONTEXT.name());
+        return (Context) Configurator.getInstance().getConfigs().get(ConfigType.APPLICATION_CONTEXT);
     }
 }

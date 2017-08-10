@@ -11,15 +11,15 @@ import java.util.HashMap;
  */
 
 public class Configurator {
-    private static final HashMap<String, Object> CONFIGS = new HashMap<>();
+    private static final HashMap<Object, Object> CONFIGS = new HashMap<>();
 
     private static final ArrayList<IconFontDescriptor> ICONS = new ArrayList<>();
 
     public Configurator() {
-        CONFIGS.put(ConfigType.CONFIG_READY.name(), false);
+        CONFIGS.put(ConfigType.CONFIG_READY, false);
     }
 
-    final HashMap<String, Object> getConfigs() {
+    final HashMap<Object, Object> getConfigs() {
         return CONFIGS;
     }
 
@@ -41,11 +41,11 @@ public class Configurator {
      */
     public final void configure() {
         initIcons();
-        CONFIGS.put(ConfigType.CONFIG_READY.name(), true);
+        CONFIGS.put(ConfigType.CONFIG_READY, true);
     }
 
     public final Configurator withApiHost(String host) {
-        CONFIGS.put(ConfigType.API_HOST.name(), host);
+        CONFIGS.put(ConfigType.API_HOST, host);
         return this;
     }
 
@@ -67,7 +67,7 @@ public class Configurator {
      * 配置检查
      */
     private void checkConfiguration() {
-        final boolean isReady = (boolean) CONFIGS.get(ConfigType.CONFIG_READY.name());
+        final boolean isReady = (boolean) CONFIGS.get(ConfigType.CONFIG_READY);
         if (!isReady) {
             throw new RuntimeException("Configuration is not ready,call configure");
         }
@@ -76,7 +76,7 @@ public class Configurator {
     @SuppressWarnings("unchecked")
     final <T> T getConfiguration(Enum<ConfigType> key) {
         checkConfiguration();
-        return (T) CONFIGS.get(key.name());
+        return (T) CONFIGS.get(key);
     }
 
 }
