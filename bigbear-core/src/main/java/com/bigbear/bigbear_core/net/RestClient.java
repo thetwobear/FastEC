@@ -8,15 +8,20 @@ import com.bigbear.bigbear_core.net.callback.IRequest;
 import com.bigbear.bigbear_core.net.callback.ISuccess;
 import com.bigbear.bigbear_core.net.callback.RequestCallBacks;
 import com.bigbear.bigbear_core.net.callback.RxRequestCallBacks;
+import com.bigbear.bigbear_core.net.callback.UploadProgressListener;
+import com.bigbear.bigbear_core.net.download.DownloadHandler;
 import com.bigbear.bigbear_core.ui.BigBearLoader;
 import com.bigbear.bigbear_core.ui.LoaderStyle;
 
+import java.io.File;
 import java.util.WeakHashMap;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,7 +40,12 @@ public class RestClient {
     private final ISuccess SUCCESS;
     private final IFailure FAILURE;
     private final IError ERROR;
-    private final RequestBody REQUESTBODY;
+    private final UploadProgressListener PROGRESS_LISTENER;
+    private final RequestBody BODY;
+    private final File FILE;
+    private final String DOWNLOAD_DIR;
+    private final String EXTENSION;
+    private final String NAME;
     private final LoaderStyle LOADER_STYLE;
     private final Context CONTEXT;
 
@@ -46,7 +56,12 @@ public class RestClient {
                       ISuccess success,
                       IFailure failure,
                       IError error,
+                      UploadProgressListener uploadProgressListener,
                       RequestBody requestbody,
+                      File file,
+                      String downloadDir,
+                      String extension,
+                      String name,
                       LoaderStyle loader_style,
                       Context context) {
         this.URL = url;
@@ -55,7 +70,12 @@ public class RestClient {
         this.SUCCESS = success;
         this.FAILURE = failure;
         this.ERROR = error;
-        this.REQUESTBODY = requestbody;
+        this.PROGRESS_LISTENER = uploadProgressListener;
+        this.BODY = requestbody;
+        this.FILE = file;
+        this.DOWNLOAD_DIR = downloadDir;
+        this.EXTENSION = extension;
+        this.NAME = name;
         this.LOADER_STYLE = loader_style;
         this.CONTEXT = context;
     }
@@ -82,11 +102,31 @@ public class RestClient {
             case POST:
                 call = service.post(URL, PARAMS);
                 break;
+            case POST_RAM:
+                call = service.postRaw(URL, BODY);
+                break;
             case PUT:
                 call = service.put(URL, PARAMS);
                 break;
+            case PUT_RAM:
+                call = service.putRaw(URL, BODY);
+                break;
             case DELETE:
                 call = service.delete(URL, PARAMS);
+                break;
+            case UPLOAD:
+                final RequestBody requestBody = RequestBody.create(MediaType.parse(MultipartBody.FORM.toString()), FILE);
+                //增加上传进度显示
+                final CoutingRequestBoay coutingRequestBoay = new CoutingRequestBoay(requestBody, new CoutingRequestBoay.ProgressListener() {
+                    @Override
+                    public void onRequestProgress(long byteWrited, long contentLength) {
+                        if (PROGRESS_LISTENER != null) {
+                            PROGRESS_LISTENER.onProgress(byteWrited, contentLength);
+                        }
+                    }
+                });
+                final MultipartBody.Part part = MultipartBody.Part.createFormData("file", FILE.getName(), coutingRequestBoay);
+                call = RestCreator.getRestService().upload(URL, part);
                 break;
             default:
                 break;
@@ -96,6 +136,11 @@ public class RestClient {
         }
     }
 
+    /**
+     * RxJava request
+     *
+     * @param method
+     */
     private void rxRequest(HttpMethod method) {
         final RestService service = RestCreator.getRestService();
         if (REQUEST != null) {
@@ -108,6 +153,9 @@ public class RestClient {
                 break;
             case POST:
                 observable = service.rxPost(URL, PARAMS);
+                break;
+            case POST_RAM:
+
                 break;
             case PUT:
                 observable = service.rxPut(URL, PARAMS);
@@ -139,12 +187,35 @@ public class RestClient {
     }
 
     public final void post() {
-        request(HttpMethod.POST);
+        if (BODY == null) {
+            request(HttpMethod.POST);
+        } else {
+            if (!PARAMS.isEmpty()) {
+                throw new RuntimeException("params must be null!");
+            }
+            request(HttpMethod.POST_RAM);
+        }
     }
 
     public final void put() {
-        request(HttpMethod.PUT);
+        if (BODY == null) {
+            request(HttpMethod.PUT);
+        } else {
+            if (!PARAMS.isEmpty()) {
+                throw new RuntimeException("params must be null!");
+            }
+            request(HttpMethod.PUT_RAM);
+        }
     }
+
+    public final void upload() {
+        request(HttpMethod.UPLOAD);
+    }
+
+    public final void download() {
+        new DownloadHandler(URL, REQUEST, SUCCESS, FAILURE, ERROR, DOWNLOAD_DIR, EXTENSION, NAME).handleDownload();
+    }
+
 
     public final void delete() {
         request(HttpMethod.DELETE);
@@ -164,5 +235,9 @@ public class RestClient {
 
     public final void rxDelete() {
         rxRequest(HttpMethod.DELETE);
+    }
+
+    public final void rxDownload() {
+        new DownloadHandler(URL, REQUEST, SUCCESS, FAILURE, ERROR, DOWNLOAD_DIR, EXTENSION, NAME).rxHandleDownload();
     }
 }

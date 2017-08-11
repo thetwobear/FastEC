@@ -12,13 +12,13 @@ import com.bigbear.bigbear_core.app.BigBear;
 public class DimenUtil {
 
     public static int getSrceenWidth() {
-        final Resources resources = BigBear.getApplication().getResources();
+        final Resources resources = BigBear.getApplicationContext().getResources();
         final DisplayMetrics dm = resources.getDisplayMetrics();
         return dm.widthPixels;
     }
 
     public static int getSrceenHeight() {
-        final Resources resources = BigBear.getApplication().getResources();
+        final Resources resources = BigBear.getApplicationContext().getResources();
         final DisplayMetrics dm = resources.getDisplayMetrics();
         return dm.heightPixels;
     }

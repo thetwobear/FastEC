@@ -19,7 +19,7 @@ public final class BigBear {
         return Configurator.getInstance().getConfigs();
     }
 
-    public static Context getApplication(){
+    public static Context getApplicationContext(){
         return (Context) Configurator.getInstance().getConfigs().get(ConfigType.APPLICATION_CONTEXT);
     }
 }

@@ -47,7 +47,7 @@ public class ExampleDelegate extends BigBearDeleate {
                     @Override
                     public void onSuccess(String response) {
                         Log.d("", response);
-//                        Toast.makeText(BigBear.getApplication(), response, Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(BigBear.getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                     }
                 })
                 .failure(new IFailure() {

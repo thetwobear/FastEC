@@ -6,8 +6,10 @@ import com.bigbear.bigbear_core.net.callback.IError;
 import com.bigbear.bigbear_core.net.callback.IFailure;
 import com.bigbear.bigbear_core.net.callback.IRequest;
 import com.bigbear.bigbear_core.net.callback.ISuccess;
+import com.bigbear.bigbear_core.net.callback.UploadProgressListener;
 import com.bigbear.bigbear_core.ui.LoaderStyle;
 
+import java.io.File;
 import java.util.WeakHashMap;
 
 import okhttp3.MediaType;
@@ -23,8 +25,13 @@ public class RestClientBuilder {
     private IRequest mIRequest = null;
     private ISuccess mISuccess = null;
     private IError mIError = null;
+    private UploadProgressListener mUploadProgressListener = null;
     private IFailure mIFailure = null;
     private RequestBody mRequestbody = null;
+    private File mFile = null;
+    private String mDownloaddir;
+    private String mExtension;
+    private String mName;
     private LoaderStyle mLoader_style = null;
     private Context mContext = null;
 
@@ -43,6 +50,16 @@ public class RestClientBuilder {
 
     public final RestClientBuilder params(String key, Object values) {
         PARAMS.put(key, values);
+        return this;
+    }
+
+    public final RestClientBuilder file(File file) {
+        this.mFile = file;
+        return this;
+    }
+
+    public final RestClientBuilder file(String filePath) {
+        this.mFile = new File(filePath);
         return this;
     }
 
@@ -71,6 +88,26 @@ public class RestClientBuilder {
         return this;
     }
 
+    public final RestClientBuilder dir(String dir) {
+        this.mDownloaddir = dir;
+        return this;
+    }
+
+    public final RestClientBuilder extension(String extension) {
+        this.mExtension = extension;
+        return this;
+    }
+
+    public final RestClientBuilder name(String name) {
+        this.mName = name;
+        return this;
+    }
+
+    public final RestClientBuilder uploadProgress(UploadProgressListener uploadProgressListener) {
+        this.mUploadProgressListener = uploadProgressListener;
+        return this;
+    }
+
     public final RestClientBuilder loader(LoaderStyle loaderStyle, Context context) {
         this.mLoader_style = loaderStyle;
         this.mContext = context;
@@ -84,6 +121,20 @@ public class RestClientBuilder {
     }
 
     public final RestClient build() {
-        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mRequestbody, mLoader_style, mContext);
+        return new RestClient(
+                mUrl,
+                PARAMS,
+                mIRequest,
+                mISuccess,
+                mIFailure,
+                mIError,
+                mUploadProgressListener,
+                mRequestbody,
+                mFile,
+                mDownloaddir,
+                mExtension,
+                mName,
+                mLoader_style,
+                mContext);
     }
 }
