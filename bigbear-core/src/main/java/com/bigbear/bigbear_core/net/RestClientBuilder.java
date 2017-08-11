@@ -1,9 +1,12 @@
 package com.bigbear.bigbear_core.net;
 
+import android.content.Context;
+
 import com.bigbear.bigbear_core.net.callback.IError;
 import com.bigbear.bigbear_core.net.callback.IFailure;
 import com.bigbear.bigbear_core.net.callback.IRequest;
 import com.bigbear.bigbear_core.net.callback.ISuccess;
+import com.bigbear.bigbear_core.ui.LoaderStyle;
 
 import java.util.WeakHashMap;
 
@@ -15,13 +18,15 @@ import okhttp3.RequestBody;
  */
 
 public class RestClientBuilder {
-    private String mUrl;
+    private String mUrl = null;
     private static final WeakHashMap<String, Object> PARAMS = RestCreator.getParams();
-    private IRequest mIRequest;
-    private ISuccess mISuccess;
-    private IError mIError;
-    private IFailure mIFailure;
-    private RequestBody mRequestbody;
+    private IRequest mIRequest = null;
+    private ISuccess mISuccess = null;
+    private IError mIError = null;
+    private IFailure mIFailure = null;
+    private RequestBody mRequestbody = null;
+    private LoaderStyle mLoader_style = null;
+    private Context mContext = null;
 
     public RestClientBuilder() {
     }
@@ -66,8 +71,19 @@ public class RestClientBuilder {
         return this;
     }
 
+    public final RestClientBuilder loader(LoaderStyle loaderStyle, Context context) {
+        this.mLoader_style = loaderStyle;
+        this.mContext = context;
+        return this;
+    }
+
+    public final RestClientBuilder loader(Context context) {
+        this.mLoader_style = LoaderStyle.BallClipRotatePulseIndicator;
+        this.mContext = context;
+        return this;
+    }
 
     public final RestClient build() {
-        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mRequestbody);
+        return new RestClient(mUrl, PARAMS, mIRequest, mISuccess, mIFailure, mIError, mRequestbody, mLoader_style, mContext);
     }
 }

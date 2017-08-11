@@ -1,11 +1,15 @@
 package com.bigbear.bigbear_core.net;
 
+import android.content.Context;
+
 import com.bigbear.bigbear_core.net.callback.IError;
 import com.bigbear.bigbear_core.net.callback.IFailure;
 import com.bigbear.bigbear_core.net.callback.IRequest;
 import com.bigbear.bigbear_core.net.callback.ISuccess;
 import com.bigbear.bigbear_core.net.callback.RequestCallBacks;
 import com.bigbear.bigbear_core.net.callback.RxRequestCallBacks;
+import com.bigbear.bigbear_core.ui.BigBearLoader;
+import com.bigbear.bigbear_core.ui.LoaderStyle;
 
 import java.util.WeakHashMap;
 
@@ -32,6 +36,9 @@ public class RestClient {
     private final IFailure FAILURE;
     private final IError ERROR;
     private final RequestBody REQUESTBODY;
+    private final LoaderStyle LOADER_STYLE;
+    private final Context CONTEXT;
+
 
     public RestClient(String url,
                       WeakHashMap<String, Object> params,
@@ -39,7 +46,9 @@ public class RestClient {
                       ISuccess success,
                       IFailure failure,
                       IError error,
-                      RequestBody requestbody) {
+                      RequestBody requestbody,
+                      LoaderStyle loader_style,
+                      Context context) {
         this.URL = url;
         PARAMS.putAll(params);
         this.REQUEST = request;
@@ -47,6 +56,8 @@ public class RestClient {
         this.FAILURE = failure;
         this.ERROR = error;
         this.REQUESTBODY = requestbody;
+        this.LOADER_STYLE = loader_style;
+        this.CONTEXT = context;
     }
 
     public static RestClientBuilder builder() {
@@ -58,6 +69,11 @@ public class RestClient {
         if (REQUEST != null) {
             REQUEST.onRequestStart();
         }
+
+        if (LOADER_STYLE != null) {
+            BigBearLoader.showLoading(CONTEXT, LOADER_STYLE);
+        }
+
         Call<String> call = null;
         switch (method) {
             case GET:
@@ -111,7 +127,7 @@ public class RestClient {
     }
 
     private Callback<String> getCallBack() {
-        return new RequestCallBacks(REQUEST, SUCCESS, FAILURE, ERROR);
+        return new RequestCallBacks(REQUEST, SUCCESS, FAILURE, ERROR, LOADER_STYLE);
     }
 
     private Observer<Response<String>> getObserver() {

@@ -37,6 +37,7 @@ public class BigBearLoader {
      */
     private static final String DEFAULT_LOADER = LoaderStyle.BallClipRotatePulseIndicator.name();
 
+
     public static void showLoading(Context context, String type) {
         final AppCompatDialog dialog = new AppCompatDialog(context, R.style.dialog);
         final AVLoadingIndicatorView avLoadingIndicatorView = LoaderCreator.create(type, context);
@@ -53,6 +54,10 @@ public class BigBearLoader {
         }
         LOADERS.add(dialog);
         dialog.show();
+    }
+
+    public static void showLoading(Context context, Enum<LoaderStyle> styleEnum) {
+        showLoading(context, styleEnum.name());
     }
 
     public static void showLoading(Context context) {
