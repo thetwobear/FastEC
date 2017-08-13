@@ -30,7 +30,7 @@ public class ExampleDelegate extends BigBearDeleate {
 
     private void test() {
         RestClient.builder()
-                .url("http://www.baidu.com/")
+                .url("http://127.0.0.1/index/")
                 .loader(getContext())
                 .onRequest(new IRequest() {
                     @Override

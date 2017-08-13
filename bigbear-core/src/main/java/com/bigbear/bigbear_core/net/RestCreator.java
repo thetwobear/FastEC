@@ -2,6 +2,7 @@ package com.bigbear.bigbear_core.net;
 
 import com.bigbear.bigbear_core.app.BigBear;
 import com.bigbear.bigbear_core.app.ConfigKeys;
+import com.bigbear.bigbear_core.net.rx.RxRestService;
 
 import java.util.ArrayList;
 import java.util.WeakHashMap;
@@ -20,10 +21,6 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class RestCreator {
 
 
-    public static RestService getRestService() {
-        return RestServiceHolder.REST_SERVICE;
-    }
-
     public static WeakHashMap<String, Object> getParams() {
         return ParamsHolder.PARAMS;
     }
@@ -32,6 +29,9 @@ public class RestCreator {
         private static final WeakHashMap<String, Object> PARAMS = new WeakHashMap<>();
     }
 
+    /**
+     * 构建全局Retrofit客户端
+     */
     private static final class RetrofitHolder {
         private static final String BASE_URL = BigBear.getConfiguration(ConfigKeys.API_HOST);
         private static final Retrofit RETROFIT_CLIENT = new Retrofit.Builder()
@@ -61,7 +61,25 @@ public class RestCreator {
                 .build();
     }
 
+    /**
+     * 构建service接口
+     */
     private static final class RestServiceHolder {
         private static final RestService REST_SERVICE = RetrofitHolder.RETROFIT_CLIENT.create(RestService.class);
+    }
+
+    public static RestService getRestService() {
+        return RestServiceHolder.REST_SERVICE;
+    }
+
+    /**
+     * 构建 Rx service接口
+     */
+    private static final class RxRestServiceHolder {
+        private static final RxRestService REST_SERVICE = RetrofitHolder.RETROFIT_CLIENT.create(RxRestService.class);
+    }
+
+    public static RxRestService getRxRestService() {
+        return RxRestServiceHolder.REST_SERVICE;
     }
 }

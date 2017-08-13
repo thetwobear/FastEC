@@ -1,6 +1,5 @@
 package com.bigbear.bigbear_core.app;
 
-import com.bigbear.bigbear_core.net.callback.IFailure;
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
@@ -59,6 +58,11 @@ public class Configurator {
                 initializer.with(ICONS.get(i));
             }
         }
+    }
+
+    public final Configurator withLoaderDelayed(long delayed) {
+        BIGBEAR_CONFIGS.put(ConfigKeys.LOADER_DELAYED, delayed);
+        return this;
     }
 
     public Configurator withIcon(IconFontDescriptor descriptor) {

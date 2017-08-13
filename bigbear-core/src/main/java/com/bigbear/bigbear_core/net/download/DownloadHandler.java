@@ -11,7 +11,6 @@ import com.bigbear.bigbear_core.net.callback.ISuccess;
 import java.util.WeakHashMap;
 
 import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -96,7 +95,7 @@ public class DownloadHandler {
         RestCreator.getRestService()
                 .rxDownload(URL, PARAMS)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+                .observeOn(Schedulers.io())
                 .subscribe(new Observer<Response<ResponseBody>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {

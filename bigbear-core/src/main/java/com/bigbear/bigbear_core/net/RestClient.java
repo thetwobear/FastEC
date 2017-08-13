@@ -84,6 +84,8 @@ public class RestClient {
         return new RestClientBuilder();
     }
 
+    //-------------------Retrofit---------------------
+
     private void request(HttpMethod method) {
         final RestService service = RestCreator.getRestService();
         if (REQUEST != null) {
@@ -136,51 +138,11 @@ public class RestClient {
         }
     }
 
-    /**
-     * RxJava request
-     *
-     * @param method
-     */
-    private void rxRequest(HttpMethod method) {
-        final RestService service = RestCreator.getRestService();
-        if (REQUEST != null) {
-            REQUEST.onRequestStart();
-        }
-        Observable<Response<String>> observable = null;
-        switch (method) {
-            case GET:
-                observable = service.rxGet(URL, PARAMS);
-                break;
-            case POST:
-                observable = service.rxPost(URL, PARAMS);
-                break;
-            case POST_RAM:
-
-                break;
-            case PUT:
-                observable = service.rxPut(URL, PARAMS);
-                break;
-            case DELETE:
-                observable = service.rxDelete(URL, PARAMS);
-                break;
-            default:
-                break;
-        }
-        if (observable != null) {
-            observable
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(getObserver());
-        }
-    }
 
     private Callback<String> getCallBack() {
         return new RequestCallBacks(REQUEST, SUCCESS, FAILURE, ERROR, LOADER_STYLE);
     }
 
-    private Observer<Response<String>> getObserver() {
-        return new RxRequestCallBacks(REQUEST, SUCCESS, FAILURE, ERROR);
-    }
 
     public final void get() {
         request(HttpMethod.GET);
@@ -208,6 +170,10 @@ public class RestClient {
         }
     }
 
+    public final void delete() {
+        request(HttpMethod.DELETE);
+    }
+
     public final void upload() {
         request(HttpMethod.UPLOAD);
     }
@@ -217,8 +183,51 @@ public class RestClient {
     }
 
 
-    public final void delete() {
-        request(HttpMethod.DELETE);
+    //-------------------RxJava-----------------
+
+    /**
+     * RxJava request
+     *
+     * @param method
+     */
+    private void rxRequest(HttpMethod method) {
+        final RestService service = RestCreator.getRestService();
+        if (REQUEST != null) {
+            REQUEST.onRequestStart();
+        }
+        Observable<Response<String>> observable = null;
+        switch (method) {
+            case GET:
+                observable = service.rxGet(URL, PARAMS);
+                break;
+            case POST:
+                observable = service.rxPost(URL, PARAMS);
+                break;
+            case POST_RAM:
+                observable = service.rxPostRaw(URL, BODY);
+                break;
+            case PUT:
+                observable = service.rxPut(URL, PARAMS);
+                break;
+            case PUT_RAM:
+                observable = service.rxPutRaw(URL, BODY);
+                break;
+            case DELETE:
+                observable = service.rxDelete(URL, PARAMS);
+                break;
+            default:
+                break;
+        }
+        if (observable != null) {
+            observable
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(getObserver());
+        }
+    }
+
+    private Observer<Response<String>> getObserver() {
+        return new RxRequestCallBacks(REQUEST, SUCCESS, FAILURE, ERROR);
     }
 
     public final void rxGet() {
@@ -226,11 +235,27 @@ public class RestClient {
     }
 
     public final void rxPost() {
-        rxRequest(HttpMethod.POST);
+        if (BODY == null) {
+            rxRequest(HttpMethod.POST);
+        } else {
+            if (!PARAMS.isEmpty()) {
+                throw new RuntimeException("params must be null!");
+            }
+            rxRequest(HttpMethod.POST_RAM);
+        }
+
     }
 
     public final void rxPut() {
-        rxRequest(HttpMethod.PUT);
+        if (BODY == null) {
+            rxRequest(HttpMethod.PUT);
+        } else {
+            if (!PARAMS.isEmpty()) {
+                throw new RuntimeException("params must be null!");
+            }
+            rxRequest(HttpMethod.PUT_RAM);
+        }
+
     }
 
     public final void rxDelete() {

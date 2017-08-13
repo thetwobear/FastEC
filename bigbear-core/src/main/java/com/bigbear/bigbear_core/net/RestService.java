@@ -27,9 +27,6 @@ import retrofit2.http.Url;
 
 public interface RestService {
 
-    @GET("login")
-    Call<String> get(@QueryMap Map<String, Object> params);
-
     @GET
     Call<String> get(@Url String url, @QueryMap Map<String, Object> params);
 
@@ -68,9 +65,15 @@ public interface RestService {
     @POST
     Observable<Response<String>> rxPost(@Url String url, @FieldMap Map<String, Object> params);
 
+    @POST
+    Observable<Response<String>> rxPostRaw(@Url String url, @Body RequestBody body);
+
     @FormUrlEncoded
     @PUT
     Observable<Response<String>> rxPut(@Url String url, @FieldMap Map<String, Object> params);
+
+    @PUT
+    Observable<Response<String>> rxPutRaw(@Url String url, @Body RequestBody body);
 
     @DELETE
     Observable<Response<String>> rxDelete(@Url String url, @QueryMap Map<String, Object> params);
