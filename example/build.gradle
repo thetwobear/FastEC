@@ -22,6 +22,6 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile project(':bigbear-ec')
-    annotationProcessor project(':bigbear-compiler')
+    compile project(':x-ec')
+    annotationProcessor project(':x-compiler')
 }

@@ -6,7 +6,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.content.FileProvider;
 
-import com.bigbear.bigbear_core.app.BigBear;
+import com.bigbear.bigbear_core.app.XCore;
 import com.bigbear.bigbear_core.net.callback.IRequest;
 import com.bigbear.bigbear_core.net.callback.ISuccess;
 import com.bigbear.bigbear_core.util.FileUtil;
@@ -76,12 +76,12 @@ public class SaveFileTask extends AsyncTask<Object, Void, File> {
             install.setAction(Intent.ACTION_VIEW);
             //Android version>6.0+ 判断
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Uri uri = FileProvider.getUriForFile(BigBear.getApplicationContext(), BigBear.getApplicationContext().getPackageName() + ".provider", apkFile);
+                Uri uri = FileProvider.getUriForFile(XCore.getApplicationContext(), XCore.getApplicationContext().getPackageName() + ".provider", apkFile);
                 install.setDataAndType(uri, "application/vnd.android.package-archive");
             } else {
                 install.setDataAndType(Uri.fromFile(apkFile), "application/vnd.android.package-archive");
             }
-            BigBear.getApplicationContext().startActivity(install);
+            XCore.getApplicationContext().startActivity(install);
         }
     }
 }
