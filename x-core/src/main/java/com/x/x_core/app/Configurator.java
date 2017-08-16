@@ -1,5 +1,7 @@
 package com.x.x_core.app;
 
+import android.app.Activity;
+
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 
@@ -24,6 +26,7 @@ public class Configurator {
 
     /**
      * 线程安全的懒汉模式
+     *
      * @return 返回当前对象
      */
     public static Configurator getInstance() {
@@ -75,8 +78,25 @@ public class Configurator {
         return this;
     }
 
+    public final Configurator withWeChatAppId(String appId) {
+        MY_CONFIGS.put(ConfigKeys.WE_CHAT_APP_ID, appId);
+        return this;
+    }
+
+
+    public final Configurator withWeChatAppSecret(String appSecret) {
+        MY_CONFIGS.put(ConfigKeys.WE_CHAT_APP_SECRET, appSecret);
+        return this;
+    }
+
+    public final Configurator withActivity(Activity activity) {
+        MY_CONFIGS.put(ConfigKeys.ACTIVITY, activity);
+        return this;
+    }
+
     /**
      * 配置字体图标库
+     *
      * @param descriptor 可以配置FontAwesomeModule，或自定义类继承IconFontDescriptor实现的字体图标库
      */
     public Configurator withIcon(IconFontDescriptor descriptor) {
@@ -94,7 +114,6 @@ public class Configurator {
     }
 
     /**
-     *
      * @param interceptors 配置网络拦截器
      */
     @SuppressWarnings("unused")
@@ -116,9 +135,10 @@ public class Configurator {
 
     /**
      * 传入对应的key值，返回出对应的配置信息
-     * @param key   key
-     * @param <T>   value 泛型
-     * @return      value
+     *
+     * @param key key
+     * @param <T> value 泛型
+     * @return value
      */
     @SuppressWarnings("unchecked")
     final <T> T getConfiguration(Object key) {

@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.widget.Toast;
 
 import com.x.x_core.activities.ProxyActivity;
+import com.x.x_core.app.XCore;
 import com.x.x_core.delegates.XDeleate;
 import com.x.x_core.ui.launcher.ILauncherListener;
 import com.x.x_core.ui.launcher.OnLauncherFinishTag;
@@ -20,6 +21,7 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
         super.onCreate(savedInstanceState);
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) actionBar.hide();
+        XCore.getConfigurator().withActivity(this);
     }
 
     @Override
