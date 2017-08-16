@@ -1,4 +1,4 @@
-package com.x.festec.example;
+package com.x.fastec.example;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

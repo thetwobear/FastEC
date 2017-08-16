@@ -24,4 +24,6 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile project(':x-ec')
     annotationProcessor project(':x-compiler')
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp:1.5.0'
 }

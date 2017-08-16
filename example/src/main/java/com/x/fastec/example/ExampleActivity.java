@@ -1,4 +1,4 @@
-package com.x.festec.example;
+package com.x.fastec.example;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,7 +7,6 @@ import android.support.v7.app.ActionBar;
 import com.x.x_core.activities.ProxyActivity;
 import com.x.x_core.delegates.XDeleate;
 import com.x.x_ec.sign.SignInDelegate;
-import com.x.x_ec.sign.SignUpDelegate;
 
 public class ExampleActivity extends ProxyActivity {
     @Override
