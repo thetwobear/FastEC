@@ -1,11 +1,16 @@
 package com.x.x_ec.launcher;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
 
+import com.x.x_core.app.AccountManger;
+import com.x.x_core.app.IUserChecker;
 import com.x.x_core.delegates.XDeleate;
+import com.x.x_core.ui.launcher.ILauncherListener;
+import com.x.x_core.ui.launcher.OnLauncherFinishTag;
 import com.x.x_core.util.storage.XPreference;
 import com.x.x_core.util.timer.BaseTimerTask;
 import com.x.x_core.util.timer.ITimerListener;
@@ -30,6 +35,16 @@ public class LauncherDelegate extends XDeleate implements ITimerListener {
 
     private int mCount = 5;
     private Timer mTimer = null;
+
+    private ILauncherListener mILauncherListener=null;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ILauncherListener){
+            mILauncherListener= (ILauncherListener) activity;
+        }
+    }
 
     @OnClick(R2.id.tv_launcher_timer)
     void onClickLauncherTimer() {
@@ -64,6 +79,21 @@ public class LauncherDelegate extends XDeleate implements ITimerListener {
             start(new LauncherScrollDelegate(), SINGLETASK);
         } else {
             //检查用户是否登录了app
+            AccountManger.checkAccunt(new IUserChecker() {
+                @Override
+                public void onSignIn() {
+                    if (mILauncherListener!=null){
+                        mILauncherListener.onLauncherFinsih(OnLauncherFinishTag.SIGNED);
+                    }
+                }
+
+                @Override
+                public void onNotSignIn() {
+                    if (mILauncherListener!=null){
+                        mILauncherListener.onLauncherFinsih(OnLauncherFinishTag.NOT_SIGNED);
+                    }
+                }
+            });
 
         }
     }

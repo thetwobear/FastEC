@@ -1,5 +1,6 @@
 package com.x.x_ec.sign;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
@@ -10,6 +11,9 @@ import android.view.View;
 
 import com.joanzapata.iconify.widget.IconTextView;
 import com.x.x_core.delegates.XDeleate;
+import com.x.x_core.net.RestClient;
+import com.x.x_core.net.callback.ISuccess;
+import com.x.x_core.util.log.XLog;
 import com.x.x_ec.R;
 import com.x.x_ec.R2;
 
@@ -33,6 +37,16 @@ public class SignInDelegate extends XDeleate {
     @BindView(R2.id.itv_sign_in_weixin)
     IconTextView itvSignInWeixin;
 
+    private ISignListener mISignListener = null;
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ISignListener) {
+            mISignListener = (ISignListener) activity;
+        }
+    }
 
     @Override
     public Object setLayout() {
@@ -42,15 +56,23 @@ public class SignInDelegate extends XDeleate {
     @OnClick(R2.id.btn_sign_in)
     void onClickSignIn() {
         if (checkForm()) {
-
+            RestClient.builder().url("http://192.168.56.1:8080/RestDataServer/api/user_profile.php")
+                    .params("email", editSignInEmail.getText().toString())
+                    .params("password", editSignInPassword.getText().toString())
+                    .success(new ISuccess() {
+                        @Override
+                        public void onSuccess(String response) {
+                            XLog.d("USER_PROFILE", response);
+                            SignHandler.onSignIn(response, mISignListener);
+                        }
+                    }).build().post();
+//            Toast.makeText(getContext(), "验证成功", Toast.LENGTH_SHORT).show();
         }
     }
 
     @OnClick(R2.id.itv_sign_in_weixin)
     void onClickWeiChat() {
-        if (checkForm()) {
 
-        }
     }
 
     @OnClick(R2.id.tv_link_sign_up)

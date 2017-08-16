@@ -1,7 +1,10 @@
 package com.x.x_ec.sign;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.PluralsRes;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
@@ -10,6 +13,9 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.x.x_core.delegates.XDeleate;
+import com.x.x_core.net.RestClient;
+import com.x.x_core.net.callback.ISuccess;
+import com.x.x_core.util.log.XLog;
 import com.x.x_ec.R;
 import com.x.x_ec.R2;
 
@@ -37,6 +43,17 @@ public class SignUpDelegate extends XDeleate {
     @BindView(R2.id.tv_link_sign_in)
     AppCompatTextView tvLinkSignIn;
 
+
+    private ISignListener mISignListener=null;
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof ISignListener){
+            mISignListener= (ISignListener) activity;
+        }
+    }
 
     private boolean checkForm() {
         final String name = editSignUpName.getText().toString();
@@ -91,7 +108,19 @@ public class SignUpDelegate extends XDeleate {
     @OnClick(R2.id.btn_sign_up)
     void onClickSignUp() {
         if (checkForm()) {
-            Toast.makeText(getContext(), "验证成功", Toast.LENGTH_SHORT).show();
+            RestClient.builder().url("http://192.168.56.1:8080/RestDataServer/api/user_profile.php")
+                    .params("name",editSignUpName.getText().toString())
+                    .params("email",editSignUpEmail.getText().toString())
+                    .params("phone",editSignUpPhone.getText().toString())
+                    .params("password",editSignUpPassword.getText().toString())
+                    .success(new ISuccess() {
+                        @Override
+                        public void onSuccess(String response) {
+                            XLog.d("USER_PROFILE",response);
+                            SignHandler.onSignUp(response,mISignListener);
+                        }
+                    }).build().post();
+//            Toast.makeText(getContext(), "验证成功", Toast.LENGTH_SHORT).show();
         }
     }
 
