@@ -7,15 +7,17 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.x.x_core.app.ConfigKeys;
 import com.x.x_core.app.XCore;
+import com.x.x_core.wechat.callbacks.IWeChatSignInCallback;
 
 /**
  * Created by 熊猿猿 on 2017/8/16/016.
  */
 
 public class XWeChat {
-    static String APP_ID = XCore.getConfiguration(ConfigKeys.WE_CHAT_APP_ID);
-    static String APP_SECRET = XCore.getConfiguration(ConfigKeys.WE_CHAT_APP_SECRET);
+    public static String APP_ID = XCore.getConfiguration(ConfigKeys.WE_CHAT_APP_ID);
+    public static String APP_SECRET = XCore.getConfiguration(ConfigKeys.WE_CHAT_APP_SECRET);
     private final IWXAPI WXAPI;
+    private IWeChatSignInCallback mSignInCallback = null;
 
     private static final class Holder {
         private static final XWeChat INSTANCE = new XWeChat();
@@ -35,6 +37,22 @@ public class XWeChat {
         return WXAPI;
     }
 
+    public IWeChatSignInCallback getmSignInCallback() {
+        return mSignInCallback;
+    }
+
+    /**
+     * 登录成功
+     * @param iWeChatSignInCallback 登录成功回调接口
+     */
+    public XWeChat onSignInSuccess(IWeChatSignInCallback iWeChatSignInCallback) {
+        this.mSignInCallback = iWeChatSignInCallback;
+        return this;
+    }
+
+    /**
+     * 微信登录
+     */
     public final void signIn() {
         final SendAuth.Req req = new SendAuth.Req();
         req.scope = "snsapi_userinfo";

@@ -16,12 +16,15 @@ public abstract class BaseWXActivity extends AppCompatActivity implements IWXAPI
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //必须写在onCreate中
         XWeChat.getInstance().getIwxapi().handleIntent(getIntent(), this);
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        //此重载方法中再写一次，保障各型号手机适配的问题
+        setIntent(intent);
         XWeChat.getInstance().getIwxapi().handleIntent(getIntent(), this);
     }
 }

@@ -14,6 +14,8 @@ import com.x.x_core.delegates.XDeleate;
 import com.x.x_core.net.RestClient;
 import com.x.x_core.net.callback.ISuccess;
 import com.x.x_core.util.log.XLog;
+import com.x.x_core.wechat.XWeChat;
+import com.x.x_core.wechat.callbacks.IWeChatSignInCallback;
 import com.x.x_ec.R;
 import com.x.x_ec.R2;
 
@@ -72,7 +74,12 @@ public class SignInDelegate extends XDeleate {
 
     @OnClick(R2.id.itv_sign_in_weixin)
     void onClickWeiChat() {
+        XWeChat.getInstance().onSignInSuccess(new IWeChatSignInCallback() {
+            @Override
+            public void onSignInSuccess(String userInfo) {
 
+            }
+        }).signIn();
     }
 
     @OnClick(R2.id.tv_link_sign_up)
