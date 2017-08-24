@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.x.x_core.app.AccountManger;
 import com.x.x_core.app.IUserChecker;
-import com.x.x_core.delegates.XDeleate;
+import com.x.x_core.delegates.XDelegate;
 import com.x.x_core.ui.launcher.ILauncherListener;
 import com.x.x_core.ui.launcher.OnLauncherFinishTag;
 import com.x.x_core.util.storage.XPreference;
@@ -28,12 +28,12 @@ import butterknife.OnClick;
  * Created by 熊猿猿 on 2017/8/14/014.
  */
 
-public class LauncherDelegate extends XDeleate implements ITimerListener {
+public class LauncherDelegate extends XDelegate implements ITimerListener {
 
     @BindView(R2.id.tv_launcher_timer)
     AppCompatTextView tvLauncherTimer;
 
-    private int mCount = 5;
+    private int mCount = 3;
     private Timer mTimer = null;
 
     private ILauncherListener mILauncherListener=null;

@@ -7,10 +7,11 @@ import android.widget.Toast;
 
 import com.x.x_core.activities.ProxyActivity;
 import com.x.x_core.app.XCore;
-import com.x.x_core.delegates.XDeleate;
+import com.x.x_core.delegates.XDelegate;
 import com.x.x_core.ui.launcher.ILauncherListener;
 import com.x.x_core.ui.launcher.OnLauncherFinishTag;
 import com.x.x_ec.launcher.LauncherDelegate;
+import com.x.x_ec.main.EcMainDelegate;
 import com.x.x_ec.sign.ISignListener;
 import com.x.x_ec.sign.SignInDelegate;
 
@@ -25,7 +26,7 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
     }
 
     @Override
-    public XDeleate setRootDelegate() {
+    public XDelegate setRootDelegate() {
         return new LauncherDelegate();
     }
 
@@ -44,11 +45,12 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
         switch (launcherTag) {
             case SIGNED:
                 Toast.makeText(this, "用户登录了", Toast.LENGTH_SHORT).show();
-                startWithPop(new ExampleDelegate());
+                startWithPop(new EcMainDelegate());
                 break;
             case NOT_SIGNED:
                 Toast.makeText(this, "用户没登录", Toast.LENGTH_SHORT).show();
-                startWithPop(new SignInDelegate());
+//                startWithPop(new SignInDelegate());
+                startWithPop(new EcMainDelegate());
                 break;
             default:
                 break;

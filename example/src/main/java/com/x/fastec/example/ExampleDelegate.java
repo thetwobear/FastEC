@@ -5,7 +5,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 
-import com.x.x_core.delegates.XDeleate;
+import com.x.x_core.delegates.XDelegate;
 import com.x.x_core.net.RestClient;
 import com.x.x_core.net.callback.IError;
 import com.x.x_core.net.callback.IFailure;
@@ -16,7 +16,7 @@ import com.x.x_core.net.callback.ISuccess;
  * Created by 熊猿猿 on 2017/8/9/009.
  */
 
-public class ExampleDelegate extends XDeleate {
+public class ExampleDelegate extends XDelegate {
 
     @Override
     public Object setLayout() {

@@ -10,7 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 
 import com.joanzapata.iconify.widget.IconTextView;
-import com.x.x_core.delegates.XDeleate;
+import com.x.x_core.delegates.XDelegate;
 import com.x.x_core.net.RestClient;
 import com.x.x_core.net.callback.ISuccess;
 import com.x.x_core.util.log.XLog;
@@ -26,7 +26,7 @@ import butterknife.OnClick;
  * Created by 熊猿猿 on 2017/8/15/015.
  */
 
-public class SignInDelegate extends XDeleate {
+public class SignInDelegate extends XDelegate {
 
     @BindView(R2.id.edit_sign_in_email)
     TextInputEditText editSignInEmail;

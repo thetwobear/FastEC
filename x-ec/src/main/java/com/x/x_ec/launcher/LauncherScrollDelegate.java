@@ -9,7 +9,7 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.bigkoo.convenientbanner.listener.OnItemClickListener;
 import com.x.x_core.app.AccountManger;
 import com.x.x_core.app.IUserChecker;
-import com.x.x_core.delegates.XDeleate;
+import com.x.x_core.delegates.XDelegate;
 import com.x.x_core.ui.launcher.ILauncherListener;
 import com.x.x_core.ui.launcher.LauncherHolderCreator;
 import com.x.x_core.ui.launcher.OnLauncherFinishTag;
@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Created by 熊猿猿 on 2017/8/14/014.
  */
 
-public class LauncherScrollDelegate extends XDeleate implements OnItemClickListener {
+public class LauncherScrollDelegate extends XDelegate implements OnItemClickListener {
     private ConvenientBanner<Integer> mConvenientBanner = null;
     private static final ArrayList<Integer> INTEGERS = new ArrayList<>();
 

@@ -1,18 +1,15 @@
 package com.x.x_ec.sign;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.PluralsRes;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.Patterns;
 import android.view.View;
-import android.widget.Toast;
 
-import com.x.x_core.delegates.XDeleate;
+import com.x.x_core.delegates.XDelegate;
 import com.x.x_core.net.RestClient;
 import com.x.x_core.net.callback.ISuccess;
 import com.x.x_core.util.log.XLog;
@@ -26,7 +23,7 @@ import butterknife.OnClick;
  * Created by 熊猿猿 on 2017/8/15/015.
  */
 
-public class SignUpDelegate extends XDeleate {
+public class SignUpDelegate extends XDelegate {
 
     @BindView(R2.id.edit_sign_up_name)
     TextInputEditText editSignUpName;

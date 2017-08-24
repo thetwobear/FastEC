@@ -5,7 +5,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.ContentFrameLayout;
 
 import com.x.x_core.R;
-import com.x.x_core.delegates.XDeleate;
+import com.x.x_core.delegates.XDelegate;
+import com.x.x_core.util.log.ToastUtil;
 
 import me.yokeyword.fragmentation.SupportActivity;
 
@@ -15,7 +16,9 @@ import me.yokeyword.fragmentation.SupportActivity;
 
 public abstract class ProxyActivity extends SupportActivity {
 
-    public abstract XDeleate setRootDelegate();
+    public abstract XDelegate setRootDelegate();
+
+    private ToastUtil toastUtil;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -30,6 +33,11 @@ public abstract class ProxyActivity extends SupportActivity {
         if (savedInstanceState == null) {
             loadRootFragment(R.id.delegate_container, setRootDelegate());
         }
+        toastUtil = new ToastUtil(this);
+    }
+
+    public ToastUtil getToastUtil() {
+        return toastUtil;
     }
 
     @Override
