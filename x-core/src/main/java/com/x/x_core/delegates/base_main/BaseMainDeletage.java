@@ -34,10 +34,10 @@ public abstract class BaseMainDeletage extends XDelegate implements View.OnClick
     private int mCurrentDelegate = 0;
     private int mIndexDelegate = 0;
     private int mClickedColor = Color.RED;
-    @BindView(R2.id.bottom_bar_deletage)
-    ContentFrameLayout bottomBarDeletage;
-    @BindView(R2.id.bottom_bar)
-    LinearLayoutCompat bottomBar;
+    @BindView(R2.id.main_bar_deletage)
+    ContentFrameLayout mainBarDeletage;
+    @BindView(R2.id.main_bar)
+    LinearLayoutCompat mainBar;
 
     public abstract LinkedHashMap<BottomTabBean, BaseMainItemDeletage> setItems(ItemBuilder builder);
 
@@ -75,8 +75,8 @@ public abstract class BaseMainDeletage extends XDelegate implements View.OnClick
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
         final int size = ITEMS.size();
         for (int i = 0; i < size; i++) {
-            LayoutInflater.from(getContext()).inflate(R.layout.tab_item_icon_text_layout, bottomBar);
-            final RelativeLayout item = (RelativeLayout) bottomBar.getChildAt(i);
+            LayoutInflater.from(getContext()).inflate(R.layout.tab_item_icon_text_layout, mainBar);
+            final RelativeLayout item = (RelativeLayout) mainBar.getChildAt(i);
             item.setTag(i);
             item.setOnClickListener(this);
             //找到对应icon、title
@@ -93,13 +93,13 @@ public abstract class BaseMainDeletage extends XDelegate implements View.OnClick
         }
 
         final SupportFragment[] delegateArray = ITEM_DELEGATE.toArray(new SupportFragment[size]);
-        loadMultipleRootFragment(R.id.bottom_bar_deletage, mIndexDelegate, delegateArray);
+        loadMultipleRootFragment(R.id.main_bar_deletage, mIndexDelegate, delegateArray);
     }
 
     private void reSetColor() {
-        final int count = bottomBar.getChildCount();
+        final int count = mainBar.getChildCount();
         for (int i = 0; i < count; i++) {
-            final RelativeLayout item = (RelativeLayout) bottomBar.getChildAt(i);
+            final RelativeLayout item = (RelativeLayout) mainBar.getChildAt(i);
             final IconTextView icon = (IconTextView) item.getChildAt(0);
             final AppCompatTextView titile = (AppCompatTextView) item.getChildAt(1);
             icon.setTextColor(Color.GRAY);
@@ -111,7 +111,7 @@ public abstract class BaseMainDeletage extends XDelegate implements View.OnClick
     public void onClick(View view) {
         final int tag = (int) view.getTag();
         reSetColor();
-        final RelativeLayout item = (RelativeLayout) bottomBar.getChildAt(tag);
+        final RelativeLayout item = (RelativeLayout) mainBar.getChildAt(tag);
         final IconTextView icon = (IconTextView) item.getChildAt(0);
         final AppCompatTextView titile = (AppCompatTextView) item.getChildAt(1);
         icon.setTextColor(mClickedColor);

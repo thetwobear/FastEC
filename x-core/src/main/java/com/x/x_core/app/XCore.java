@@ -1,6 +1,7 @@
 package com.x.x_core.app;
 
 import android.content.Context;
+import android.os.Handler;
 
 /**
  * Created by bear on 2017/8/7/007.
@@ -26,5 +27,8 @@ public final class XCore {
 
     public static Context getApplicationContext() {
         return getConfigurator().getConfiguration(ConfigKeys.APPLICATION_CONTEXT);
+    }
+    public static Handler getHandler() {
+        return getConfiguration(ConfigKeys.HANDLER);
     }
 }
