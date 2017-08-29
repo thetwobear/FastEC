@@ -5,4 +5,9 @@ package com.x.x_core.delegates;
  */
 
 public abstract class XDelegate extends PermissionCheckerDelegate {
+
+    @SuppressWarnings("unused")
+    public <T extends XDelegate> T getParentDelegate() {
+        return (T) getParentFragment();
+    }
 }

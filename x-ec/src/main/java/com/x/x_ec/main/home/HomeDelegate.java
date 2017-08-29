@@ -20,6 +20,7 @@ import com.x.x_core.ui.refresh.RefreshLayout;
 import com.x.x_core.util.dimen.DimenUtil;
 import com.x.x_ec.R;
 import com.x.x_ec.R2;
+import com.x.x_ec.main.EcMainDelegate;
 
 import butterknife.BindView;
 
@@ -78,6 +79,9 @@ public class HomeDelegate extends BaseMainItemDeletage {
                 }
             }
         });
+
+        final EcMainDelegate mainDelegate = getParentDelegate();
+        rvHome.addOnItemTouchListener(HomeItemClickListener.create(mainDelegate));
     }
 
     private void initToolBar() {
