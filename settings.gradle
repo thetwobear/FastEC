@@ -1,1 +1,1 @@
-include ':example', ':x-annotations', ':x-compiler', ':x-core', ':x-ec'
+include ':example', ':x-annotations', ':x-compiler', ':x-core', ':x-ec', ':x-ui'

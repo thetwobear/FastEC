@@ -21,9 +21,6 @@ import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 
-/**
- * Created by 熊猿猿 on 2017/8/16/016.
- */
 @SuppressWarnings("unused")
 @AutoService(Processor.class)
 public class XProcessor extends AbstractProcessor {

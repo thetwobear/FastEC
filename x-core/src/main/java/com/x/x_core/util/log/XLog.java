@@ -30,6 +30,7 @@ public final class XLog {
         }
     }
 
+
     public static void d(Object message) {
         if (LEVEL <= DEBUG) {
             Logger.d(message);

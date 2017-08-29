@@ -135,6 +135,7 @@ public class RestClientBuilder {
                 mExtension,
                 mName,
                 mLoader_style,
-                mContext);
+                mContext
+        );
     }
 }

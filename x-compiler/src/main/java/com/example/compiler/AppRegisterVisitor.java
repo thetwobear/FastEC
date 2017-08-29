@@ -9,9 +9,6 @@ import javax.annotation.processing.Filer;
 import javax.lang.model.element.Modifier;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.SimpleAnnotationValueVisitor7;
-/**
- * Created by 熊猿猿 on 2017/8/16/016.
- */
 
 public class AppRegisterVisitor extends SimpleAnnotationValueVisitor7<Void, Void> {
 

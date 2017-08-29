@@ -9,6 +9,8 @@ import com.x.x_core.net.interceptors.DebugInterceptor;
 import com.x.x_ec.database.DatabaseManger;
 import com.x.x_ec.icon.FontEcModule;
 
+import okhttp3.logging.HttpLoggingInterceptor;
+
 /**
  * Created by bear on 2017/8/7/007.
  */
@@ -19,13 +21,14 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         XCore.init(this)
-                .withIcon(new FontAwesomeModule())
-                .withIcon(new FontEcModule())
-                .withApiHost("http://127.0.0.1/index/")
+                .withIcon(new FontAwesomeModule())//FontAwesome字体图标库
+                .withIcon(new FontEcModule())//添加自定义字体
+                .withApiHost("http://116.196.95.67/RestServer/api/")
                 .withLoaderDelayed(1000)
                 .withWeChatAppId("")//微信AppId
                 .withWeChatAppSecret("")//微信AppSecret
-                .withInterceptor(new DebugInterceptor("index", R.raw.test))
+//                .withInterceptor(new DebugInterceptor("index", R.raw.test))//自定义网络拦截器
+                .withInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))//拦截body内容并打印
                 .configure();
         DatabaseManger.getInstance().init(this);
         initStetho();

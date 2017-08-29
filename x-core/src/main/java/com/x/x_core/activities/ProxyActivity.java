@@ -6,6 +6,7 @@ import android.support.v7.widget.ContentFrameLayout;
 
 import com.x.x_core.R;
 import com.x.x_core.delegates.XDelegate;
+import com.x.x_core.util.dimen.DimenUtil;
 import com.x.x_core.util.log.ToastUtil;
 
 import me.yokeyword.fragmentation.SupportActivity;
@@ -23,7 +24,15 @@ public abstract class ProxyActivity extends SupportActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //手动设置沉浸式状态栏
+        DimenUtil.translucentStatusBar(this);
+
         initContainer(savedInstanceState);
+
+        //通过依赖包方式设置沉浸式状态栏
+//        StatusBarCompat.translucentStatusBar(this, true);
+
+
     }
 
     private void initContainer(@Nullable Bundle savedInstanceState) {

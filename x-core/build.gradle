@@ -21,7 +21,6 @@ android {
         }
     }
 }
-
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -51,6 +50,7 @@ dependencies {
     //okhttp
     compile 'com.squareup.okio:okio:1.13.0'
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     //rxjava
     compile 'io.reactivex.rxjava2:rxjava:2.1.1'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
@@ -64,11 +64,26 @@ dependencies {
     compile 'com.alibaba:fastjson:1.1.62.android'
     //greendao 数据库
     compile 'org.greenrobot:greendao:3.2.2'
-    compile 'org.greenrobot:greendao-generator:3.2.2' //greendao 生成器
+    //greendao 生成器
+    compile 'org.greenrobot:greendao-generator:3.2.2'
     //logger
     compile 'com.orhanobut:logger:2.1.1'
     //微信依赖（包含统计）
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
-    //RecycleView Adapter
+    //RecycleView 适配器
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:+'
+    //RecycleView 分割线
+    compile 'com.choices.divider:RecyclerView_Divider:1.0.0'
+    //图片处理
+    compile 'com.github.bumptech.glide:glide:4.0.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+    compile 'com.github.bumptech.glide:okhttp3-integration:4.0.0'
+    //沉浸式状态栏
+    compile ('com.github.niorgai:StatusBarCompat:2.1.4', {
+        exclude group: 'com.android.support'
+    })
+    //Google Auto value
+    provided 'com.google.auto.value:auto-value:1.4.1'
+    annotationProcessor "com.google.auto.value:auto-value:1.4.1"
 }
+

@@ -11,6 +11,8 @@ import android.view.View;
 
 import com.x.x_core.delegates.XDelegate;
 import com.x.x_core.net.RestClient;
+import com.x.x_core.net.callback.IError;
+import com.x.x_core.net.callback.IFailure;
 import com.x.x_core.net.callback.ISuccess;
 import com.x.x_core.util.log.XLog;
 import com.x.x_ec.R;
@@ -41,14 +43,14 @@ public class SignUpDelegate extends XDelegate {
     AppCompatTextView tvLinkSignIn;
 
 
-    private ISignListener mISignListener=null;
+    private ISignListener mISignListener = null;
 
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if (activity instanceof ISignListener){
-            mISignListener= (ISignListener) activity;
+        if (activity instanceof ISignListener) {
+            mISignListener = (ISignListener) activity;
         }
     }
 
@@ -105,18 +107,33 @@ public class SignUpDelegate extends XDelegate {
     @OnClick(R2.id.btn_sign_up)
     void onClickSignUp() {
         if (checkForm()) {
-            RestClient.builder().url("http://192.168.56.1:8080/RestDataServer/api/user_profile.php")
-                    .params("name",editSignUpName.getText().toString())
-                    .params("email",editSignUpEmail.getText().toString())
-                    .params("phone",editSignUpPhone.getText().toString())
-                    .params("password",editSignUpPassword.getText().toString())
+            RestClient.builder().url("user_profile.php")
+                    .params("name", editSignUpName.getText().toString())
+                    .params("email", editSignUpEmail.getText().toString())
+                    .params("phone", editSignUpPhone.getText().toString())
+                    .params("password", editSignUpPassword.getText().toString())
                     .success(new ISuccess() {
                         @Override
                         public void onSuccess(String response) {
-                            XLog.d("USER_PROFILE",response);
-                            SignHandler.onSignUp(response,mISignListener);
+                            XLog.d("USER_PROFILE", response);
+                            SignHandler.onSignUp(response, mISignListener);
                         }
-                    }).build().post();
+                    })
+                    .failure(new IFailure() {
+                        @Override
+                        public void onFailure() {
+                            System.out.println("sign up failure");
+                        }
+                    })
+                    .error(new IError() {
+                        @Override
+                        public void onError(int code, String msg) {
+                            XLog.e("Error", "code:" + code + "\nmsg" + msg);
+                        }
+                    })
+                    .loader(getContext())
+                    .build()
+                    .rxPost();
 //            Toast.makeText(getContext(), "验证成功", Toast.LENGTH_SHORT).show();
         }
     }

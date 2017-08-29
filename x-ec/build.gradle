@@ -27,4 +27,5 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile project(':x-core')
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.0'
+    compile project(':x-ui')
 }

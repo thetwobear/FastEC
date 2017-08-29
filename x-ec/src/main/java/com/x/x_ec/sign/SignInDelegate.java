@@ -12,6 +12,8 @@ import android.view.View;
 import com.joanzapata.iconify.widget.IconTextView;
 import com.x.x_core.delegates.XDelegate;
 import com.x.x_core.net.RestClient;
+import com.x.x_core.net.callback.IError;
+import com.x.x_core.net.callback.IFailure;
 import com.x.x_core.net.callback.ISuccess;
 import com.x.x_core.util.log.XLog;
 import com.x.x_core.wechat.XWeChat;
@@ -58,7 +60,8 @@ public class SignInDelegate extends XDelegate {
     @OnClick(R2.id.btn_sign_in)
     void onClickSignIn() {
         if (checkForm()) {
-            RestClient.builder().url("http://192.168.56.1:8080/RestDataServer/api/user_profile.php")
+            RestClient.builder()
+                    .url("user_profile.php")
                     .params("email", editSignInEmail.getText().toString())
                     .params("password", editSignInPassword.getText().toString())
                     .success(new ISuccess() {
@@ -67,8 +70,22 @@ public class SignInDelegate extends XDelegate {
                             XLog.d("USER_PROFILE", response);
                             SignHandler.onSignIn(response, mISignListener);
                         }
-                    }).build().post();
-//            Toast.makeText(getContext(), "验证成功", Toast.LENGTH_SHORT).show();
+                    })
+                    .error(new IError() {
+                        @Override
+                        public void onError(int code, String msg) {
+                            XLog.e("Error", "code:" + code + "\nmsg" + msg);
+                        }
+                    })
+                    .failure(new IFailure() {
+                        @Override
+                        public void onFailure() {
+                            System.out.println("sign in failure");
+                        }
+                    })
+                    .loader(getContext())
+                    .build()
+                    .rxPost();
         }
     }
 

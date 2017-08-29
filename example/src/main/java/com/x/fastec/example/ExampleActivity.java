@@ -15,6 +15,8 @@ import com.x.x_ec.main.EcMainDelegate;
 import com.x.x_ec.sign.ISignListener;
 import com.x.x_ec.sign.SignInDelegate;
 
+import qiu.niorgai.StatusBarCompat;
+
 public class ExampleActivity extends ProxyActivity implements ISignListener, ILauncherListener {
 
     @Override
@@ -33,24 +35,25 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
     @Override
     public void onSignInSuccess() {
         Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+        startWithPop(new EcMainDelegate());
     }
 
     @Override
     public void onSignUpSuccess() {
         Toast.makeText(this, "注册成功", Toast.LENGTH_SHORT).show();
+        startWithPop(new EcMainDelegate());
     }
 
     @Override
     public void onLauncherFinsih(OnLauncherFinishTag launcherTag) {
         switch (launcherTag) {
             case SIGNED:
-                Toast.makeText(this, "用户登录了", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, "用户已登录", Toast.LENGTH_SHORT).show();
                 startWithPop(new EcMainDelegate());
                 break;
             case NOT_SIGNED:
                 Toast.makeText(this, "用户没登录", Toast.LENGTH_SHORT).show();
-//                startWithPop(new SignInDelegate());
-                startWithPop(new EcMainDelegate());
+                startWithPop(new SignInDelegate());
                 break;
             default:
                 break;
