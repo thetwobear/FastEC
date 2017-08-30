@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -14,18 +14,18 @@
         <android.support.v7.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:gravity="center"
             android:paddingTop="6dp"
-            android:text="分类"
+            android:text="商品分类"
             android:textColor="@android:color/white"
-            android:textSize="20sp" />
-
+            android:textSize="18sp" />
     </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/app_background"
+        android:background="@color/white"
         android:baselineAligned="true"
         android:orientation="horizontal">
 
@@ -39,9 +39,9 @@
             android:id="@+id/sort_content_container"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_weight="2.5" />
+            android:layout_weight="3"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp" />
 
     </android.support.v7.widget.LinearLayoutCompat>
-</LinearLayout>
+</android.support.v7.widget.LinearLayoutCompat>

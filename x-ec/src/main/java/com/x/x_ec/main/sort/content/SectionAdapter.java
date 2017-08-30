@@ -20,8 +20,12 @@ public class SectionAdapter extends BaseSectionQuickAdapter<SectionBean, BaseVie
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .dontAnimate();
 
-    public SectionAdapter(int layoutResId, int sectionHeadResId, List<SectionBean> data) {
+    private SectionAdapter(int layoutResId, int sectionHeadResId, List<SectionBean> data) {
         super(layoutResId, sectionHeadResId, data);
+    }
+
+    static SectionAdapter create(int layoutResId, int sectionHeadResId, List<SectionBean> data) {
+        return new SectionAdapter(layoutResId, sectionHeadResId, data);
     }
 
     @Override

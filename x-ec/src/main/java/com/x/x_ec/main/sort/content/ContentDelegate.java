@@ -9,6 +9,7 @@ import android.view.View;
 import com.x.x_core.delegates.XDelegate;
 import com.x.x_core.net.RestClient;
 import com.x.x_core.net.callback.ISuccess;
+import com.x.x_core.util.log.XLog;
 import com.x.x_ec.R;
 import com.x.x_ec.R2;
 
@@ -61,6 +62,11 @@ public class ContentDelegate extends XDelegate {
         initData();
     }
 
+    @Override
+    public void onLazyInitView(@Nullable Bundle savedInstanceState) {
+        super.onLazyInitView(savedInstanceState);
+    }
+
     private void initData() {
         RestClient.builder()
                 .url("sort_content_list.php?contentId=" + mContentId)
@@ -68,9 +74,14 @@ public class ContentDelegate extends XDelegate {
                     @Override
                     public void onSuccess(String response) {
                         mData = new SectionDataConverter().convert(response);
-                        final SectionAdapter sectionAdapter =
-                                new SectionAdapter(R.layout.item_section_content, R.layout.item_section_header, mData);
-                        rvListContent.setAdapter(sectionAdapter);
+                        if (mData != null && mData.size() > 0) {
+                            final SectionAdapter sectionAdapter = SectionAdapter.create(R.layout.item_section_content, R.layout.item_section_header, mData);
+                            try {
+                                rvListContent.setAdapter(sectionAdapter);
+                            } catch (NullPointerException ignored) {
+                                XLog.d(ignored.toString());
+                            }
+                        }
                     }
                 })
                 .build()
