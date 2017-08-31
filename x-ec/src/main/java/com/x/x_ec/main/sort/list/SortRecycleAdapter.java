@@ -10,6 +10,7 @@ import com.x.x_core.ui.recycler.MultiRecyclerAdapter;
 import com.x.x_core.ui.recycler.MultiViewHolder;
 import com.x.x_core.ui.recycler.MultipleFileds;
 import com.x.x_core.ui.recycler.MultipleItemEntity;
+import com.x.x_core.util.dimen.DimenUtil;
 import com.x.x_ec.R;
 import com.x.x_ec.main.sort.SortDelegate;
 import com.x.x_ec.main.sort.content.ContentDelegate;
@@ -67,12 +68,14 @@ public class SortRecycleAdapter extends MultiRecyclerAdapter {
                 if (!isClicked) {
                     line.setVisibility(View.INVISIBLE);
                     nameTv.setTextColor(ContextCompat.getColor(mContext, R.color.we_chat_black));
-                    itemView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.item_background));
+                    nameTv.setTextSize(12);
+//                    itemView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.item_background));
                 } else {
                     line.setVisibility(View.VISIBLE);
+                    nameTv.setTextSize(16);
                     line.setBackgroundColor(ContextCompat.getColor(mContext, R.color.app_main));
                     nameTv.setTextColor(ContextCompat.getColor(mContext, R.color.app_main));
-                    itemView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
+//                    itemView.setBackgroundColor(ContextCompat.getColor(mContext, R.color.white));
                 }
                 nameTv.setText(name);
 

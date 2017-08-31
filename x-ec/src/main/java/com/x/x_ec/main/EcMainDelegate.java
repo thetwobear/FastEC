@@ -2,9 +2,9 @@ package com.x.x_ec.main;
 
 import android.graphics.Color;
 
-import com.x.x_core.delegates.base_main.BaseMainDeletage;
-import com.x.x_core.delegates.base_main.BaseMainItemDeletage;
-import com.x.x_core.delegates.base_main.BottomTabBean;
+import com.x.x_core.delegates.base_main.BaseMainDelegate;
+import com.x.x_core.delegates.base_main.BaseMainItemDelegate;
+import com.x.x_core.delegates.base_main.TabBean;
 import com.x.x_core.delegates.base_main.ItemBuilder;
 import com.x.x_ec.main.compass.CompassDelegate;
 import com.x.x_ec.main.home.HomeDelegate;
@@ -18,20 +18,20 @@ import java.util.LinkedHashMap;
  * Created by 熊猿猿 on 2017/8/24/024.
  */
 
-public class EcMainDelegate extends BaseMainDeletage {
+public class EcMainDelegate extends BaseMainDelegate {
     @Override
-    public LinkedHashMap<BottomTabBean, BaseMainItemDeletage> setItems(ItemBuilder builder) {
-        final LinkedHashMap<BottomTabBean, BaseMainItemDeletage> items = new LinkedHashMap<>();
-        items.put(new BottomTabBean("{fa-home}", "主页"), new HomeDelegate());
-        items.put(new BottomTabBean("{fa-sort}", "分类"), new SortDelegate());
-        items.put(new BottomTabBean("{fa-compass}", "发现"), new CompassDelegate());
-        items.put(new BottomTabBean("{fa-shopping-cart}", "购物车"), new ShoppingCartDelegate());
-        items.put(new BottomTabBean("{fa-user}", "我的"), new MyDelegate());
+    public LinkedHashMap<TabBean, BaseMainItemDelegate> setItems(ItemBuilder builder) {
+        final LinkedHashMap<TabBean, BaseMainItemDelegate> items = new LinkedHashMap<>();
+        items.put(new TabBean("{icon-home}", "主页"), new HomeDelegate());
+        items.put(new TabBean("{icon-sort}", "分类"), new SortDelegate());
+        items.put(new TabBean("{icon-find}", "发现"), new CompassDelegate());
+        items.put(new TabBean("{icon-shopping-cart}", "购物车"), new ShoppingCartDelegate());
+        items.put(new TabBean("{icon-my}", "我的"), new MyDelegate());
         return builder.addItems(items).build();
     }
 
     @Override
-    public int setIndexDeletage() {
+    public int setIndexDelegate() {
         return 0;
     }
 

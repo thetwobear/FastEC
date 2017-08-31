@@ -4,4 +4,6 @@
     <string name="icon_scan">{icon-scan}</string>
     <string name="fa_commenting_o">{fa-commenting-o}</string>
     <string name="fa_qrcode">{fa-qrcode}</string>
+    <string name="icon_qr_code">{icon-qr-code}</string>
+    <string name="icon_msg">{icon-msg}</string>
 </resources>

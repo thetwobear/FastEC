@@ -40,7 +40,7 @@
                 android:gravity="center"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:text="@string/icon_scan"
+                android:text="@string/icon_qr_code"
                 android:textColor="@android:color/white"
                 android:textSize="25sp" />
 
@@ -66,7 +66,7 @@
                 android:gravity="center"
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
-                android:text="@string/fa_commenting_o"
+                android:text="@string/icon_msg"
                 android:textColor="@android:color/white"
                 android:textSize="25sp" />
         </android.support.v7.widget.LinearLayoutCompat>

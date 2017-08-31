@@ -10,7 +10,7 @@ import com.x.x_core.delegates.XDelegate;
  * Created by 熊猿猿 on 2017/8/24/024.
  */
 
-public abstract class BaseMainItemDeletage extends XDelegate implements View.OnKeyListener {
+public abstract class BaseMainItemDelegate extends XDelegate implements View.OnKeyListener {
     private long mExitTime = 0;
     private static final int EXIT_TIME = 2000;
 

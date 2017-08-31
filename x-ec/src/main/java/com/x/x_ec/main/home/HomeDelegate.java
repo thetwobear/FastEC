@@ -12,7 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.joanzapata.iconify.widget.IconTextView;
-import com.x.x_core.delegates.base_main.BaseMainItemDeletage;
+import com.x.x_core.delegates.base_main.BaseMainItemDelegate;
 import com.x.x_core.ui.recycler.BaseDecoration;
 import com.x.x_core.ui.recycler.RgbValue;
 import com.x.x_core.ui.refresh.RefreshHanlder;
@@ -28,7 +28,7 @@ import butterknife.BindView;
  * Created by 熊猿猿 on 2017/8/24/024.
  */
 
-public class HomeDelegate extends BaseMainItemDeletage {
+public class HomeDelegate extends BaseMainItemDelegate {
     @BindView(R2.id.rv_home)
     RecyclerView rvHome;
     @BindView(R2.id.srl_home)

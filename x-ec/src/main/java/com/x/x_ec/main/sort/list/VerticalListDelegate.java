@@ -59,7 +59,12 @@ public class VerticalListDelegate extends XDelegate {
                                 new VerticalListDataConverter().setJsonData(response).convert();
                         final SortDelegate sortDelegate = getParentDelegate();
                         final SortRecycleAdapter sortRecycleAdapter = new SortRecycleAdapter(data, sortDelegate);
-                        rvVerticalMenuList.setAdapter(sortRecycleAdapter);
+                        try {
+                            rvVerticalMenuList.setAdapter(sortRecycleAdapter);
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 })
                 .build()

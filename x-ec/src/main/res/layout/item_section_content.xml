@@ -3,22 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="1dp"
-    android:background="@android:color/white"
     android:orientation="vertical">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/iv"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_gravity="center"
-        android:layout_marginBottom="10dp" />
+        android:layout_height="78dp"
+        android:layout_gravity="center" />
 
     <android.support.v7.widget.AppCompatTextView
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:id="@+id/tv"
+        android:textSize="10sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
-        android:textColor="@color/we_chat_black"
+        android:textColor="@color/goods_text"
         android:textStyle="bold" />
 
 </android.support.v7.widget.LinearLayoutCompat>

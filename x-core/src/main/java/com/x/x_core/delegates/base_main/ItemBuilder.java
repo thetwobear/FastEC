@@ -7,23 +7,23 @@ import java.util.LinkedHashMap;
  */
 
 public final class ItemBuilder {
-    private final LinkedHashMap<BottomTabBean, BaseMainItemDeletage> ITEMS = new LinkedHashMap<>();
+    private final LinkedHashMap<TabBean, BaseMainItemDelegate> ITEMS = new LinkedHashMap<>();
 
     static ItemBuilder builder() {
         return new ItemBuilder();
     }
 
-    public final ItemBuilder addItem(BottomTabBean bean, BaseMainItemDeletage deletage) {
+    public final ItemBuilder addItem(TabBean bean, BaseMainItemDelegate deletage) {
         ITEMS.put(bean, deletage);
         return this;
     }
 
-    public final ItemBuilder addItems(LinkedHashMap<BottomTabBean, BaseMainItemDeletage> items) {
+    public final ItemBuilder addItems(LinkedHashMap<TabBean, BaseMainItemDelegate> items) {
         ITEMS.putAll(items);
         return this;
     }
 
-    public final LinkedHashMap<BottomTabBean, BaseMainItemDeletage> build() {
+    public final LinkedHashMap<TabBean, BaseMainItemDelegate> build() {
         return ITEMS;
     }
 }

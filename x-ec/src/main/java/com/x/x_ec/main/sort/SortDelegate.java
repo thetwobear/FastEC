@@ -7,7 +7,7 @@ import android.support.v7.widget.ContentFrameLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.x.x_core.delegates.base_main.BaseMainItemDeletage;
+import com.x.x_core.delegates.base_main.BaseMainItemDelegate;
 import com.x.x_core.util.dimen.DimenUtil;
 import com.x.x_ec.R;
 import com.x.x_ec.R2;
@@ -20,7 +20,7 @@ import butterknife.BindView;
  * Created by 熊猿猿 on 2017/8/24/024.
  */
 
-public class SortDelegate extends BaseMainItemDeletage {
+public class SortDelegate extends BaseMainItemDelegate {
 
     @BindView(R2.id.tb_sort)
     Toolbar tbSort;

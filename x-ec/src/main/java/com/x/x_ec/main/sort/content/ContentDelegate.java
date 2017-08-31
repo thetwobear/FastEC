@@ -78,8 +78,8 @@ public class ContentDelegate extends XDelegate {
                             final SectionAdapter sectionAdapter = SectionAdapter.create(R.layout.item_section_content, R.layout.item_section_header, mData);
                             try {
                                 rvListContent.setAdapter(sectionAdapter);
-                            } catch (NullPointerException ignored) {
-                                XLog.d(ignored.toString());
+                            } catch (NullPointerException e) {
+                               e.printStackTrace();
                             }
                         }
                     }
