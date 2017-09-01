@@ -9,7 +9,6 @@ import android.view.View;
 import com.x.x_core.delegates.XDelegate;
 import com.x.x_core.net.RestClient;
 import com.x.x_core.net.callback.ISuccess;
-import com.x.x_core.util.log.XLog;
 import com.x.x_ec.R;
 import com.x.x_ec.R2;
 
@@ -79,7 +78,7 @@ public class ContentDelegate extends XDelegate {
                             try {
                                 rvListContent.setAdapter(sectionAdapter);
                             } catch (NullPointerException e) {
-                               e.printStackTrace();
+                                e.printStackTrace();
                             }
                         }
                     }

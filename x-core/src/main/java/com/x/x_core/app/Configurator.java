@@ -2,11 +2,14 @@ package com.x.x_core.app;
 
 import android.app.Activity;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 
 import com.joanzapata.iconify.IconFontDescriptor;
 import com.joanzapata.iconify.Iconify;
 import com.orhanobut.logger.AndroidLogAdapter;
 import com.orhanobut.logger.Logger;
+import com.x.x_core.delegates.web.event.Event;
+import com.x.x_core.delegates.web.event.EventManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -115,6 +118,16 @@ public class Configurator {
     public Configurator withInterceptor(Interceptor interceptor) {
         INTERCEPTORS.add(interceptor);
         MY_CONFIGS.put(ConfigKeys.INTERCEPTOR, INTERCEPTORS);
+        return this;
+    }
+    public Configurator withJavascriptInterface(@NonNull String name) {
+        MY_CONFIGS.put(ConfigKeys.JAVASCRIPT_INTERFACE, name);
+        return this;
+    }
+
+    public Configurator withWebEvent(@NonNull String name, @NonNull Event event) {
+        final EventManager manager = EventManager.getInstance();
+        manager.addEvent(name, event);
         return this;
     }
 

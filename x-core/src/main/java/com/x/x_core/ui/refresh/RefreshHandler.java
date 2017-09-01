@@ -16,7 +16,7 @@ import com.x.x_core.ui.recycler.MultiRecyclerAdapter;
  * Created by 熊猿猿 on 2017/8/27/027.
  */
 
-public class RefreshHanlder implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
+public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener, BaseQuickAdapter.RequestLoadMoreListener {
 
     private final RefreshLayout SWIPE_REFRESH_LAYOUT;
 
@@ -25,7 +25,7 @@ public class RefreshHanlder implements SwipeRefreshLayout.OnRefreshListener, Bas
     private MultiRecyclerAdapter mAdapter = null;
     private final DataConverter CONVERTER;
 
-    private RefreshHanlder(RefreshLayout swipeRefreshLayout,
+    private RefreshHandler(RefreshLayout swipeRefreshLayout,
                            RecyclerView recyclerView,
                            DataConverter converter,
                            PagingBean bean
@@ -37,8 +37,8 @@ public class RefreshHanlder implements SwipeRefreshLayout.OnRefreshListener, Bas
         SWIPE_REFRESH_LAYOUT.setOnRefreshListener(this);
     }
 
-    public static RefreshHanlder create(RefreshLayout swipeRefreshLayout, RecyclerView recyclerView, DataConverter converter) {
-        return new RefreshHanlder(swipeRefreshLayout, recyclerView, converter, new PagingBean());
+    public static RefreshHandler create(RefreshLayout swipeRefreshLayout, RecyclerView recyclerView, DataConverter converter) {
+        return new RefreshHandler(swipeRefreshLayout, recyclerView, converter, new PagingBean());
     }
 
     private void refresh() {
@@ -69,7 +69,7 @@ public class RefreshHanlder implements SwipeRefreshLayout.OnRefreshListener, Bas
                          * MultiRecyclerAdapter.create()传入数据转换器，转换数据
                          */
                         mAdapter = MultiRecyclerAdapter.create(CONVERTER.setJsonData(response));
-                        mAdapter.setOnLoadMoreListener(RefreshHanlder.this, RECYCLE_VIEW);
+                        mAdapter.setOnLoadMoreListener(RefreshHandler.this, RECYCLE_VIEW);
                         RECYCLE_VIEW.setAdapter(mAdapter);
                         PAGING_BEAN.addIndex();
                     }

@@ -1,4 +1,4 @@
-package com.x.x_ec.main.sort;
+package com.x.x_ec.main.discover;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -9,34 +9,31 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.x.x_core.delegates.base_main.BaseMainItemDelegate;
+import com.x.x_core.delegates.web.WebDelegateImpl;
 import com.x.x_core.util.dimen.DimenUtil;
 import com.x.x_ec.R;
 import com.x.x_ec.R2;
-import com.x.x_ec.main.sort.content.ContentDelegate;
-import com.x.x_ec.main.sort.list.VerticalListDelegate;
 
 import butterknife.BindView;
+import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 /**
  * Created by 熊猿猿 on 2017/8/24/024.
  */
 
-public class SortDelegate extends BaseMainItemDelegate {
-
+public class DiscoverDelegate extends BaseMainItemDelegate {
 
     @BindView(R2.id.common_toolbar_title)
     TextView commonToolbarTitle;
     @BindView(R2.id.common_toolbar)
     Toolbar commonToolbar;
-    @BindView(R2.id.vertical_list_container)
-    ContentFrameLayout verticalListContainer;
-    @BindView(R2.id.sort_content_container)
-    ContentFrameLayout sortContentContainer;
-
+    @BindView(R2.id.web_discovery_container)
+    ContentFrameLayout webDiscoveryContainer;
 
     @Override
     public Object setLayout() {
-        return R.layout.delegate_sort;
+        return R.layout.delegate_discover;
     }
 
     @Override
@@ -47,18 +44,18 @@ public class SortDelegate extends BaseMainItemDelegate {
     @Override
     public void onLazyInitView(@Nullable Bundle savedInstanceState) {
         super.onLazyInitView(savedInstanceState);
-        initToolBar();
-        final VerticalListDelegate listDelegate = new VerticalListDelegate();
-        getSupportDelegate().loadRootFragment(R.id.vertical_list_container, listDelegate);
-        //设置右侧第一个分类显示，默认显示分类一
-        getSupportDelegate().loadRootFragment(R.id.sort_content_container, ContentDelegate.newInstance(1));
-    }
-
-    private void initToolBar() {
+        commonToolbarTitle.setText("发现");
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             commonToolbar.setPadding(0, DimenUtil.getStatusBarHeight(), 0, 0);
         }
-        commonToolbarTitle.setText("分类");
+
+        final WebDelegateImpl webDelegate = WebDelegateImpl.create("index.html");
+        webDelegate.setTopDelegate(this.getParentDelegate());
+        loadRootFragment(R.id.web_discovery_container, webDelegate);
     }
 
+    @Override
+    public FragmentAnimator onCreateFragmentAnimator() {
+        return new DefaultHorizontalAnimator();
+    }
 }

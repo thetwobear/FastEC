@@ -4,23 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/tb_sort"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@android:color/holo_orange_dark"
-        android:gravity="center">
-
-        <android.support.v7.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:paddingTop="6dp"
-            android:text="商品分类"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
-    </android.support.v7.widget.Toolbar>
+    <include layout="@layout/common_toolbar" />
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -32,9 +16,9 @@
         <android.support.v7.widget.ContentFrameLayout
             android:id="@+id/vertical_list_container"
             android:layout_width="0dp"
-            android:background="#FEFEFE"
             android:layout_height="match_parent"
-            android:layout_weight="1.2" />
+            android:layout_weight="1.2"
+            android:background="#FEFEFE" />
 
         <View
             android:layout_width="0.3dp"
@@ -44,9 +28,9 @@
         <android.support.v7.widget.ContentFrameLayout
             android:id="@+id/sort_content_container"
             android:layout_width="0dp"
-            android:background="#FFFFFF"
             android:layout_height="match_parent"
             android:layout_weight="5"
+            android:background="#FFFFFF"
             android:paddingLeft="8dp"
             android:paddingRight="8dp" />
 

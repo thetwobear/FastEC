@@ -6,5 +6,6 @@
     <color name="app_main">@android:color/holo_orange_dark</color>
     <color name="white">@android:color/white</color>
     <color name="goods_text">#767676</color>
+    <color name="test">#edecec</color>
 
 </resources>

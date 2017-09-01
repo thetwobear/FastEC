@@ -15,7 +15,7 @@ import com.joanzapata.iconify.widget.IconTextView;
 import com.x.x_core.delegates.base_main.BaseMainItemDelegate;
 import com.x.x_core.ui.recycler.BaseDecoration;
 import com.x.x_core.ui.recycler.RgbValue;
-import com.x.x_core.ui.refresh.RefreshHanlder;
+import com.x.x_core.ui.refresh.RefreshHandler;
 import com.x.x_core.ui.refresh.RefreshLayout;
 import com.x.x_core.util.dimen.DimenUtil;
 import com.x.x_ec.R;
@@ -41,7 +41,7 @@ public class HomeDelegate extends BaseMainItemDelegate {
     IconTextView iconHomeMessage;
     @BindView(R2.id.tb_home)
     Toolbar tbHome;
-    private RefreshHanlder mRefreshHanlder = null;
+    private RefreshHandler mRefreshHandler = null;
 
 
     private void initRefreshLayout() {
@@ -96,7 +96,7 @@ public class HomeDelegate extends BaseMainItemDelegate {
         initToolBar();
         initRefreshLayout();
         initRecycleView();
-        mRefreshHanlder.firstPage("index.php");
+        mRefreshHandler.firstPage("index.php");
 
     }
 
@@ -107,7 +107,7 @@ public class HomeDelegate extends BaseMainItemDelegate {
 
     @Override
     public void onBindView(@Nullable Bundle savedInstanceState, View rootView) {
-        mRefreshHanlder = RefreshHanlder.create(srlHome, rvHome, new HomeDataConverter());
+        mRefreshHandler = RefreshHandler.create(srlHome, rvHome, new HomeDataConverter());
     }
 
 }

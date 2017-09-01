@@ -6,9 +6,9 @@ import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.wang.avi.AVLoadingIndicatorView;
 import com.x.x_core.R;
 import com.x.x_core.util.dimen.DimenUtil;
-import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 
@@ -46,7 +46,7 @@ public class XLoader {
         int deviceHeight = DimenUtil.getSrceenWidth();
         final Window dialogWindow = dialog.getWindow();
         if (dialogWindow != null) {
-            WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+           final WindowManager.LayoutParams lp = dialogWindow.getAttributes();
             lp.width = deviceWidth / LOADER_SIZE_SCALE;
             lp.height = deviceHeight / LOADER_SIZE_SCALE;
             lp.height = lp.height + deviceHeight / LOADER_OFFSET_SCALE;

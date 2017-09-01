@@ -24,6 +24,7 @@ public abstract class ProxyActivity extends SupportActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //手动设置沉浸式状态栏
         DimenUtil.translucentStatusBar(this);
 
