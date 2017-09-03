@@ -69,6 +69,16 @@ public class Configurator {
         return this;
     }
 
+
+    /**
+     * @param host 配置全局的Web Host 浏览器加载的host
+     */
+    public final Configurator withWebHost(String host) {
+        MY_CONFIGS.put(ConfigKeys.WEB_HOST, host);
+        return this;
+    }
+
+
     /**
      * 初始化字体图标库，或者说添加
      */

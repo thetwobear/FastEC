@@ -6,6 +6,7 @@ import com.facebook.stetho.Stetho;
 import com.joanzapata.iconify.fonts.FontAwesomeModule;
 import com.x.x_core.app.XCore;
 import com.x.x_core.delegates.web.event.TestEvent;
+import com.x.x_core.net.rx.AddCookieInterceptor;
 import com.x.x_ec.database.DatabaseManger;
 import com.x.x_ec.icon.FontEcModule;
 
@@ -21,16 +22,25 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         XCore.init(this)
-                .withIcon(new FontAwesomeModule())//FontAwesome字体图标库
-                .withIcon(new FontEcModule())//添加自定义字体
+                //FontAwesome字体图标库
+                .withIcon(new FontAwesomeModule())
+                //添加自定义字体
+                .withIcon(new FontEcModule())
+                //OkHttp BaseUrl
                 .withApiHost("http://116.196.95.67/RestServer/api/")
                 .withLoaderDelayed(1000)
                 .withJavascriptInterface("latte")
-//                .withWebEvent("test", new TestEvent())
-                .withWeChatAppId("")//微信AppId
-                .withWeChatAppSecret("")//微信AppSecret
+                .withWebEvent("test", new TestEvent())
+                //微信AppId
+                .withWeChatAppId("")
+                //微信AppSecret
+                .withWeChatAppSecret("")
 //                .withInterceptor(new DebugInterceptor("index", R.raw.test))//自定义网络拦截器
-                .withInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))//拦截body内容并打印
+                .withWebHost("http://www.baidu.com/")
+                //添加Cookie同步拦截器
+                .withInterceptor(new AddCookieInterceptor())
+                //拦截body内容并打印
+                .withInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .configure();
         DatabaseManger.getInstance().init(this);
 //        initStetho();

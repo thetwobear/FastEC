@@ -2,16 +2,19 @@ package com.x.x_core.delegates.web.client;
 
 import android.graphics.Bitmap;
 import android.os.Handler;
+import android.webkit.CookieManager;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.x.x_core.app.ConfigKeys;
 import com.x.x_core.app.XCore;
 import com.x.x_core.delegates.web.IPageLoadListener;
 import com.x.x_core.delegates.web.WebDelegate;
 import com.x.x_core.delegates.web.route.Router;
 import com.x.x_core.ui.loader.XLoader;
 import com.x.x_core.util.log.XLog;
+import com.x.x_core.util.storage.XPreference;
 
 /**
  * Created by 熊猿猿 on 2017/8/31/031.
@@ -57,6 +60,7 @@ public class WebViewClientImpl extends WebViewClient {
     @Override
     public void onPageFinished(WebView view, String url) {
         super.onPageFinished(view, url);
+        syncCookie();
         if (mIPageLoadListener != null) {
             mIPageLoadListener.onLoadEnd();
         }
@@ -66,5 +70,24 @@ public class WebViewClientImpl extends WebViewClient {
                 XLoader.stopLoading();
             }
         }, 1000);
+    }
+
+    /**
+     * 获取浏览器Cookie
+     */
+    private void syncCookie() {
+        final CookieManager manager = CookieManager.getInstance();
+        /**
+         * 注意：这里的Cookkie和API请求的Cookkie是不一样的，这个在网页不可见
+         */
+        final String webHost = XCore.getConfiguration(ConfigKeys.WEB_HOST);
+        if (webHost != null) {
+            if (manager.hasCookies()) {
+                final String cookieStr = manager.getCookie(webHost);
+                if (cookieStr != null && !cookieStr.equals("")) {
+                    XPreference.addCustomAppProfile("cookie", cookieStr);
+                }
+            }
+        }
     }
 }
