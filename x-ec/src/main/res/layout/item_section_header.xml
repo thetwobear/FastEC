@@ -23,7 +23,8 @@
         android:text="手机"
         android:textColor="@color/goods_text"
         android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:ignore="HardcodedText" />
 
     <View
         android:layout_width="24dp"

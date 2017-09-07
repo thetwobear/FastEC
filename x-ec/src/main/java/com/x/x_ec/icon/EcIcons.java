@@ -16,7 +16,9 @@ public enum EcIcons implements Icon {
     icon_shopping_cart('\ue63f'),//购物车
     icon_my('\ue659'),//我
     icon_qr_code('\ue642'),//二维码
-    icon_msg('\ue665');//消息
+    icon_msg('\ue665'),//消息
+    icon_select_all_false('\ue848'),//全选-空
+    icon_select_all_true('\ue67f');//全选
 
     private char character;
 
