@@ -27,7 +27,7 @@ public class MultipleItemEntity implements MultiItemEntity {
     }
 
     @SuppressWarnings("uncheched")
-    public final <T> T getFiled(Object key) {
+    public final <T> T getField(Object key) {
         return (T) FILEDS_REFRENCE.get().get(key);
     }
 

@@ -71,8 +71,11 @@
         android:layout_weight="1" />
 
     <android.support.v7.widget.ViewStubCompat
+        android:id="@+id/view_stub_shop_cart"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout="@layout/stub_cart_no_item"
         android:background="@android:color/white"
         android:minHeight="50dp"
         android:orientation="horizontal" />
@@ -95,7 +98,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="{icon-select-all-false}"
+                android:text="@string/icon_selected_false"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="20sp"
                 tools:ignore="HardcodedText,NestedWeights" />

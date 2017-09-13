@@ -13,7 +13,6 @@
         android:id="@+id/main_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#FFEDECEC"
         android:layout_alignParentBottom="true"
         android:orientation="horizontal" />
 </RelativeLayout>

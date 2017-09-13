@@ -6,4 +6,6 @@
     <string name="fa_qr_code">{fa-qrcode}</string>
     <string name="icon_qr_code">{icon-qr-code}</string>
     <string name="icon_msg">{icon-msg}</string>
+    <string name="icon_selected_true">{icon-selected-true}</string>
+    <string name="icon_selected_false">{icon-selected-false}</string>
 </resources>

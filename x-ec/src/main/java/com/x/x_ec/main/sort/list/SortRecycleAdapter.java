@@ -10,7 +10,6 @@ import com.x.x_core.ui.recycler.MultiRecyclerAdapter;
 import com.x.x_core.ui.recycler.MultiViewHolder;
 import com.x.x_core.ui.recycler.MultipleFileds;
 import com.x.x_core.ui.recycler.MultipleItemEntity;
-import com.x.x_core.util.dimen.DimenUtil;
 import com.x.x_ec.R;
 import com.x.x_ec.main.sort.SortDelegate;
 import com.x.x_ec.main.sort.content.ContentDelegate;
@@ -42,8 +41,8 @@ public class SortRecycleAdapter extends MultiRecyclerAdapter {
         super.convert(helper, item);
         switch (helper.getItemViewType()) {
             case ItemType.VERTICAL_MENU_LIST:
-                final String name = item.getFiled(MultipleFileds.NAME);
-                final boolean isClicked = item.getFiled(MultipleFileds.TAG);
+                final String name = item.getField(MultipleFileds.NAME);
+                final boolean isClicked = item.getField(MultipleFileds.TAG);
                 final AppCompatTextView nameTv = helper.getView(R.id.tv_vertical_item_name);
                 final View line = helper.getView(R.id.view_line);
                 final View itemView = helper.itemView;
@@ -60,7 +59,7 @@ public class SortRecycleAdapter extends MultiRecyclerAdapter {
                             notifyItemChanged(mCurrentPosition);
                             //替换选中角标
                             mPrePosition = mCurrentPosition;
-                            final int contentId = item.getFiled(MultipleFileds.ID);
+                            final int contentId = item.getField(MultipleFileds.ID);
                             showContent(contentId);
                         }
                     }

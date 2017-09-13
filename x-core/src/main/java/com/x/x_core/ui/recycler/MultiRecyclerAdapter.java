@@ -62,13 +62,13 @@ public class MultiRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleItem
         final LinearLayoutCompat.LayoutParams imgParams1 = new LinearLayoutCompat.LayoutParams(DimenUtil.getSrceenWidth() / 2, DimenUtil.getSrceenWidth() / 2);
         switch (helper.getItemViewType()) {
             case ItemType.TEXT:
-                text = item.getFiled(MultipleFileds.TEXT);
+                text = item.getField(MultipleFileds.TEXT);
                 helper.setText(R.id.text_single, text);
                 break;
             case ItemType.IMAGE:
-                imageUrl = item.getFiled(MultipleFileds.IMAGE_URL);
+                imageUrl = item.getField(MultipleFileds.IMAGE_URL);
                 AppCompatImageView singleImg = helper.getView(R.id.img_single);
-                final int spanSize = item.getFiled(MultipleFileds.SPAN_SIZE);
+                final int spanSize = item.getField(MultipleFileds.SPAN_SIZE);
                 if (spanSize == 2) {
                     singleImg.setLayoutParams(imgParams1);
                 }
@@ -79,8 +79,8 @@ public class MultiRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleItem
 
                 break;
             case ItemType.TEXT_IMAGE:
-                text = item.getFiled(MultipleFileds.TEXT);
-                imageUrl = item.getFiled(MultipleFileds.IMAGE_URL);
+                text = item.getField(MultipleFileds.TEXT);
+                imageUrl = item.getField(MultipleFileds.IMAGE_URL);
                 helper.setText(R.id.text_multiple, text);
                 Glide.with(mContext)
                         .load(imageUrl)
@@ -89,7 +89,7 @@ public class MultiRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleItem
                 break;
             case ItemType.BANNER:
                 if (!isInitBanner) {
-                    banners = item.getFiled(MultipleFileds.BANNERS);
+                    banners = item.getField(MultipleFileds.BANNERS);
                     final ConvenientBanner<String> convenientBanner = helper.getView(R.id.banner_recycle_item);
                     BannerCreater.setDeault(convenientBanner, banners, this);
                     isInitBanner = true;
@@ -101,7 +101,7 @@ public class MultiRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleItem
 
     @Override
     public int getSpanSize(GridLayoutManager gridLayoutManager, int position) {
-        return getData().get(position).getFiled(MultipleFileds.SPAN_SIZE);
+        return getData().get(position).getField(MultipleFileds.SPAN_SIZE);
     }
 
     @Override
