@@ -29,7 +29,7 @@ public class AccountManger {
         return XPreference.getAppFlag(SignTag.SIGN_TAG.name());
     }
 
-    public static void checkAccunt(IUserChecker iUserChecker) {
+    public static void checkAccount(IUserChecker iUserChecker) {
         if (isSignIn()) {
             iUserChecker.onSignIn();
         } else {

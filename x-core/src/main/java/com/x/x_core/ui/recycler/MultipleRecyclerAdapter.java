@@ -23,7 +23,7 @@ import java.util.List;
  * Created by 熊猿猿 on 2017/8/28/028.
  */
 
-public class MultiRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleItemEntity, MultiViewHolder> implements
+public class MultipleRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleItemEntity, MultipleViewHolder> implements
         BaseQuickAdapter.SpanSizeLookup, OnItemClickListener {
 
 
@@ -40,21 +40,21 @@ public class MultiRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleItem
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .dontAnimate();
 
-    protected MultiRecyclerAdapter(List<MultipleItemEntity> data) {
+    protected MultipleRecyclerAdapter(List<MultipleItemEntity> data) {
         super(data);
         init();
     }
 
-    public static MultiRecyclerAdapter create(List<MultipleItemEntity> data) {
-        return new MultiRecyclerAdapter(data);
+    public static MultipleRecyclerAdapter create(List<MultipleItemEntity> data) {
+        return new MultipleRecyclerAdapter(data);
     }
 
-    public static MultiRecyclerAdapter create(DataConverter converter) {
-        return new MultiRecyclerAdapter(converter.convert());
+    public static MultipleRecyclerAdapter create(DataConverter converter) {
+        return new MultipleRecyclerAdapter(converter.convert());
     }
 
     @Override
-    protected void convert(MultiViewHolder helper, MultipleItemEntity item) {
+    protected void convert(MultipleViewHolder helper, MultipleItemEntity item) {
         final String text;
         final String imageUrl;
         final ArrayList<String> banners;
@@ -62,13 +62,13 @@ public class MultiRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleItem
         final LinearLayoutCompat.LayoutParams imgParams1 = new LinearLayoutCompat.LayoutParams(DimenUtil.getSrceenWidth() / 2, DimenUtil.getSrceenWidth() / 2);
         switch (helper.getItemViewType()) {
             case ItemType.TEXT:
-                text = item.getField(MultipleFileds.TEXT);
+                text = item.getField(MultipleFields.TEXT);
                 helper.setText(R.id.text_single, text);
                 break;
             case ItemType.IMAGE:
-                imageUrl = item.getField(MultipleFileds.IMAGE_URL);
+                imageUrl = item.getField(MultipleFields.IMAGE_URL);
                 AppCompatImageView singleImg = helper.getView(R.id.img_single);
-                final int spanSize = item.getField(MultipleFileds.SPAN_SIZE);
+                final int spanSize = item.getField(MultipleFields.SPAN_SIZE);
                 if (spanSize == 2) {
                     singleImg.setLayoutParams(imgParams1);
                 }
@@ -79,8 +79,8 @@ public class MultiRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleItem
 
                 break;
             case ItemType.TEXT_IMAGE:
-                text = item.getField(MultipleFileds.TEXT);
-                imageUrl = item.getField(MultipleFileds.IMAGE_URL);
+                text = item.getField(MultipleFields.TEXT);
+                imageUrl = item.getField(MultipleFields.IMAGE_URL);
                 helper.setText(R.id.text_multiple, text);
                 Glide.with(mContext)
                         .load(imageUrl)
@@ -89,7 +89,7 @@ public class MultiRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleItem
                 break;
             case ItemType.BANNER:
                 if (!isInitBanner) {
-                    banners = item.getField(MultipleFileds.BANNERS);
+                    banners = item.getField(MultipleFields.BANNERS);
                     final ConvenientBanner<String> convenientBanner = helper.getView(R.id.banner_recycle_item);
                     BannerCreater.setDeault(convenientBanner, banners, this);
                     isInitBanner = true;
@@ -101,13 +101,13 @@ public class MultiRecyclerAdapter extends BaseMultiItemQuickAdapter<MultipleItem
 
     @Override
     public int getSpanSize(GridLayoutManager gridLayoutManager, int position) {
-        return getData().get(position).getField(MultipleFileds.SPAN_SIZE);
+        return getData().get(position).getField(MultipleFields.SPAN_SIZE);
     }
 
     @Override
-    protected MultiViewHolder createBaseViewHolder(View view) {
+    protected MultipleViewHolder createBaseViewHolder(View view) {
         //返回自定义的MultiViewHolder
-        return MultiViewHolder.create(view);
+        return MultipleViewHolder.create(view);
     }
 
     private void init() {

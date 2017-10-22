@@ -4,7 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.x.x_core.ui.recycler.DataConverter;
-import com.x.x_core.ui.recycler.MultipleFileds;
+import com.x.x_core.ui.recycler.MultipleFields;
 import com.x.x_core.ui.recycler.MultipleItemEntity;
 
 import java.util.ArrayList;
@@ -29,15 +29,15 @@ public class ShopCartDataConverter extends DataConverter {
             final int count = data.getInteger("count");
             final String thumb = data.getString("thumb");
             final MultipleItemEntity entity = new MultipleItemEntity.Builder()
-                    .setFiled(MultipleFileds.ITEM_TYPE, ShopCartItemType.SHOP_CART_ITEM)
-                    .setFiled(MultipleFileds.ID, id)
-                    .setFiled(MultipleFileds.IMAGE_URL, thumb)
-                    .setFiled(ShopCartItemFields.TITLE, title)
-                    .setFiled(ShopCartItemFields.DESC, desc)
-                    .setFiled(ShopCartItemFields.COUNT, count)
-                    .setFiled(ShopCartItemFields.PRICE, price)
-                    .setFiled(ShopCartItemFields.IS_SELECTED, false)
-                    .setFiled(ShopCartItemFields.POSITION, i)
+                    .setField(MultipleFields.ITEM_TYPE, ShopCartItemType.SHOP_CART_ITEM)
+                    .setField(MultipleFields.ID, id)
+                    .setField(MultipleFields.IMAGE_URL, thumb)
+                    .setField(ShopCartItemFields.TITLE, title)
+                    .setField(ShopCartItemFields.DESC, desc)
+                    .setField(ShopCartItemFields.COUNT, count)
+                    .setField(ShopCartItemFields.PRICE, price)
+                    .setField(ShopCartItemFields.IS_SELECTED, false)
+                    .setField(ShopCartItemFields.POSITION, i)
                     .build();
             dataList.add(entity);
         }

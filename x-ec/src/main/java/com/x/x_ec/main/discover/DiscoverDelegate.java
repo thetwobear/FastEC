@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.ContentFrameLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.x.x_core.delegates.base_main.BaseMainItemDelegate;
@@ -50,6 +51,9 @@ public class DiscoverDelegate extends BaseMainItemDelegate {
         }
 
         final WebDelegateImpl webDelegate = WebDelegateImpl.create("index.html");
+        WebView view = webDelegate.getWebView();
+//        final WebDelegateImpl webDelegate = WebDelegateImpl.create("http://m.liankur.com/");
+//        final WebDelegateImpl webDelegate = WebDelegateImpl.create("http://192.168.1.116:8031/");
         webDelegate.setTopDelegate(this.getParentDelegate());
         loadRootFragment(R.id.web_discovery_container, webDelegate);
     }

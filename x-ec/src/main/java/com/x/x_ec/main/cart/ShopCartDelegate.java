@@ -14,17 +14,22 @@ import android.support.v7.widget.ViewStubCompat;
 import android.view.View;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.joanzapata.iconify.widget.IconTextView;
 import com.x.x_core.delegates.base_main.BaseMainItemDelegate;
 import com.x.x_core.net.RestClient;
 import com.x.x_core.net.callback.ISuccess;
 import com.x.x_core.ui.recycler.MultipleItemEntity;
 import com.x.x_core.util.dimen.DimenUtil;
+import com.x.x_core.util.log.XLog;
 import com.x.x_ec.R;
 import com.x.x_ec.R2;
+import com.x.x_ec.pay.FastPay;
+import com.x.x_ec.pay.IAliResultListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.WeakHashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -34,7 +39,7 @@ import butterknife.OnClick;
  * Created by 熊猿猿 on 2017/8/24/024.
  */
 
-public class ShopCartDelegate extends BaseMainItemDelegate implements ISuccess, ICartItemListener {
+public class ShopCartDelegate extends BaseMainItemDelegate implements ISuccess, ICartItemListener,IAliResultListener {
 
     @BindView(R2.id.shop_cart_toolbar)
     Toolbar shopCartToolbar;
@@ -66,6 +71,8 @@ public class ShopCartDelegate extends BaseMainItemDelegate implements ISuccess, 
      * 购物车商品总数量
      */
     private int mTotalCount = 0;
+
+    private double mTotalPrice = 0.00;
 
     @OnClick(R2.id.llay_shop_cart_select_all)
     void onClickSelectAll() {
@@ -120,14 +127,42 @@ public class ShopCartDelegate extends BaseMainItemDelegate implements ISuccess, 
     }
 
     @OnClick(R2.id.tv_shop_cart_check_out)
-    void onClickCheckOut() {
-
+    void onClickPay() {
+        FastPay.create(this).beginPayDialog();
     }
 
     /**
-     * 创建订单
+     * 创建订单,和支付是没有关系的
      */
     private void createOrder() {
+        final String orderUrl = "http://app.api.zanzuanshi.com/api/v1/peyment";
+        final WeakHashMap<String, Object> orderParams = new WeakHashMap<>();
+        orderParams.put("userId", 246392);
+        orderParams.put("amount", 0.01);
+        orderParams.put("comment", "测试支付");
+        orderParams.put("type", 1);
+        orderParams.put("ordertype", 0);
+        orderParams.put("isannonymous", true);
+        orderParams.put("followeduser", 0);
+        RestClient.builder()
+                .url(orderUrl)
+                .params(orderParams)
+                .loader(getContext())
+                .success(new ISuccess() {
+                    @Override
+                    public void onSuccess(String response) {
+                        //进行具体的支付
+                        XLog.d("ORDER", response);
+                        final int orderId = JSON.parseObject(response).getInteger("result");
+                        FastPay.create(ShopCartDelegate.this)
+                                .setPayResultListener(ShopCartDelegate.this)
+                                .setOrderId(orderId)
+                                .beginPayDialog();
+
+                    }
+                })
+                .build()
+                .post();
 
     }
 
@@ -185,6 +220,7 @@ public class ShopCartDelegate extends BaseMainItemDelegate implements ISuccess, 
         rvShopCartList.setLayoutManager(manager);
         rvShopCartList.setAdapter(mAdapter);
         mAdapter.setiCartItemListener(this);
+        mTotalPrice = mAdapter.getTotalPrice();
         checkedItemCount();
     }
 
@@ -202,7 +238,33 @@ public class ShopCartDelegate extends BaseMainItemDelegate implements ISuccess, 
 
     @Override
     public void onItemClick(double itemTotalPrice) {
+        XLog.d(itemTotalPrice);
         final double price = mAdapter.getTotalPrice();
         tvShopCartTotalAmount.setText(String.valueOf(price));
+    }
+
+    @Override
+    public void onPaySuccess() {
+
+    }
+
+    @Override
+    public void onPaying() {
+
+    }
+
+    @Override
+    public void onPayFail() {
+
+    }
+
+    @Override
+    public void onPayCancel() {
+
+    }
+
+    @Override
+    public void onPayConnectError() {
+
     }
 }

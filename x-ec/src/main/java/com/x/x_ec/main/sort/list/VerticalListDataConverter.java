@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.x.x_core.ui.recycler.DataConverter;
 import com.x.x_core.ui.recycler.ItemType;
-import com.x.x_core.ui.recycler.MultipleFileds;
+import com.x.x_core.ui.recycler.MultipleFields;
 import com.x.x_core.ui.recycler.MultipleItemEntity;
 
 import java.util.ArrayList;
@@ -27,14 +27,14 @@ public class VerticalListDataConverter extends DataConverter {
             final int id = itemObject.getInteger("id");
             final String name = itemObject.getString("name");
             final MultipleItemEntity entity = new MultipleItemEntity.Builder()
-                    .setFiled(MultipleFileds.ITEM_TYPE, ItemType.VERTICAL_MENU_LIST)
-                    .setFiled(MultipleFileds.ID, id)
-                    .setFiled(MultipleFileds.NAME, name)
-                    .setFiled(MultipleFileds.TAG, false)
+                    .setField(MultipleFields.ITEM_TYPE, ItemType.VERTICAL_MENU_LIST)
+                    .setField(MultipleFields.ID, id)
+                    .setField(MultipleFields.NAME, name)
+                    .setField(MultipleFields.TAG, false)
                     .build();
             verticalList.add(entity);
             //设置被选中的项
-            verticalList.get(0).setFiled(MultipleFileds.TAG, true);
+            verticalList.get(0).setFiled(MultipleFields.TAG, true);
         }
         return verticalList;
     }

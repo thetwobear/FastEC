@@ -66,7 +66,7 @@ public class LauncherScrollDelegate extends XDelegate implements OnItemClickList
         if (position == INTEGERS.size() - 1) {
             XPreference.setAppFlag(ScrollLauncherTag.HAS_FIRST_LAUNCHER_APP.name(), true);
             //检查用户是否登录了app
-            AccountManger.checkAccunt(new IUserChecker() {
+            AccountManger.checkAccount(new IUserChecker() {
                 @Override
                 public void onSignIn() {
                     if (mILauncherListener!=null){

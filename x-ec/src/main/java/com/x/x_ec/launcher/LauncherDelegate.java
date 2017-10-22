@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.AppCompatTextView;
 import android.view.View;
+import android.widget.Toast;
 
 import com.x.x_core.app.AccountManger;
 import com.x.x_core.app.IUserChecker;
@@ -52,6 +53,7 @@ public class LauncherDelegate extends XDelegate implements ITimerListener {
             mTimer.cancel();
             mTimer = null;
             checkIsShowScroll();
+
         }
     }
 
@@ -79,7 +81,7 @@ public class LauncherDelegate extends XDelegate implements ITimerListener {
             start(new LauncherScrollDelegate(), SINGLETASK);
         } else {
             //检查用户是否登录了app
-            AccountManger.checkAccunt(new IUserChecker() {
+            AccountManger.checkAccount(new IUserChecker() {
                 @Override
                 public void onSignIn() {
                     if (mILauncherListener!=null){

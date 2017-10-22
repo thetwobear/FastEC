@@ -5,7 +5,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.x.x_core.ui.recycler.DataConverter;
 import com.x.x_core.ui.recycler.ItemType;
-import com.x.x_core.ui.recycler.MultipleFileds;
+import com.x.x_core.ui.recycler.MultipleFields;
 import com.x.x_core.ui.recycler.MultipleItemEntity;
 
 import java.util.ArrayList;
@@ -43,12 +43,12 @@ public class HomeDataConverter extends DataConverter {
                 }
             }
             final MultipleItemEntity entity = new MultipleItemEntity.Builder()
-                    .setFiled(MultipleFileds.ITEM_TYPE, type)
-                    .setFiled(MultipleFileds.SPAN_SIZE, spanSize)
-                    .setFiled(MultipleFileds.ID, id)
-                    .setFiled(MultipleFileds.TEXT, text)
-                    .setFiled(MultipleFileds.IMAGE_URL, imageUrl)
-                    .setFiled(MultipleFileds.BANNERS, bannerImages)
+                    .setField(MultipleFields.ITEM_TYPE, type)
+                    .setField(MultipleFields.SPAN_SIZE, spanSize)
+                    .setField(MultipleFields.ID, id)
+                    .setField(MultipleFields.TEXT, text)
+                    .setField(MultipleFields.IMAGE_URL, imageUrl)
+                    .setField(MultipleFields.BANNERS, bannerImages)
                     .build();
             ENTITIES.add(entity);
         }

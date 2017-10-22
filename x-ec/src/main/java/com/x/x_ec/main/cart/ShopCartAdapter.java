@@ -14,9 +14,9 @@ import com.bumptech.glide.request.RequestOptions;
 import com.joanzapata.iconify.widget.IconTextView;
 import com.x.x_core.net.RestClient;
 import com.x.x_core.net.callback.ISuccess;
-import com.x.x_core.ui.recycler.MultiRecyclerAdapter;
-import com.x.x_core.ui.recycler.MultiViewHolder;
-import com.x.x_core.ui.recycler.MultipleFileds;
+import com.x.x_core.ui.recycler.MultipleRecyclerAdapter;
+import com.x.x_core.ui.recycler.MultipleViewHolder;
+import com.x.x_core.ui.recycler.MultipleFields;
 import com.x.x_core.ui.recycler.MultipleItemEntity;
 import com.x.x_ec.R;
 
@@ -26,7 +26,7 @@ import java.util.List;
  * Created by 熊猿猿 on 2017/9/4/004.
  */
 
-public class ShopCartAdapter extends MultiRecyclerAdapter {
+public class ShopCartAdapter extends MultipleRecyclerAdapter {
 
     private boolean isSelectedAll = false;
 
@@ -71,13 +71,13 @@ public class ShopCartAdapter extends MultiRecyclerAdapter {
 
     @SuppressLint("SetTextI18n")
     @Override
-    protected void convert(final MultiViewHolder helper, final MultipleItemEntity item) {
+    protected void convert(final MultipleViewHolder helper, final MultipleItemEntity item) {
         super.convert(helper, item);
         switch (helper.getItemViewType()) {
             case ShopCartItemType.SHOP_CART_ITEM:
                 //取出所有值
-                final int id = item.getField(MultipleFileds.ID);
-                final String thumb = item.getField(MultipleFileds.IMAGE_URL);
+                final int id = item.getField(MultipleFields.ID);
+                final String thumb = item.getField(MultipleFields.IMAGE_URL);
                 final String title = item.getField(ShopCartItemFields.TITLE);
                 final String desc = item.getField(ShopCartItemFields.DESC);
                 final int count = item.getField(ShopCartItemFields.COUNT);
@@ -161,7 +161,7 @@ public class ShopCartAdapter extends MultiRecyclerAdapter {
                     @Override
                     public void onClick(View view) {
                         final int currentCount = item.getField(ShopCartItemFields.COUNT);
-                        if (Integer.parseInt(tvCount.getText().toString()) > 1) {
+                        if (Integer.parseInt(tvCount.getText().toString()) >= 1) {
                             RestClient.builder()
                                     .loader(mContext)
                                     .url("shop_cart_count.php")

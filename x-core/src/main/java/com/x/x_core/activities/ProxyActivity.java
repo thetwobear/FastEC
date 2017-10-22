@@ -26,7 +26,7 @@ public abstract class ProxyActivity extends SupportActivity {
         super.onCreate(savedInstanceState);
 
         //手动设置沉浸式状态栏
-        DimenUtil.translucentStatusBar(this);
+//        DimenUtil.translucentStatusBar(this);
 
         initContainer(savedInstanceState);
 

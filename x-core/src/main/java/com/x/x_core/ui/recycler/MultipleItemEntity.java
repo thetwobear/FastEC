@@ -23,7 +23,7 @@ public class MultipleItemEntity implements MultiItemEntity {
 
     @Override
     public int getItemType() {
-        return (int) FILEDS_REFRENCE.get().get(MultipleFileds.ITEM_TYPE);
+        return (int) FILEDS_REFRENCE.get().get(MultipleFields.ITEM_TYPE);
     }
 
     @SuppressWarnings("uncheched")
@@ -49,11 +49,11 @@ public class MultipleItemEntity implements MultiItemEntity {
         }
 
         public final Builder setItemType(int itemType) {
-            FILEDS.put(MultipleFileds.ITEM_TYPE, itemType);
+            FILEDS.put(MultipleFields.ITEM_TYPE, itemType);
             return this;
         }
 
-        public final Builder setFiled(Object key, Object value) {
+        public final Builder setField(Object key, Object value) {
             FILEDS.put(key, value);
             return this;
         }

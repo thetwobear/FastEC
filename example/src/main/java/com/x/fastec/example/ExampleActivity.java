@@ -29,7 +29,8 @@ public class ExampleActivity extends ProxyActivity implements ISignListener, ILa
 
     @Override
     public XDelegate setRootDelegate() {
-        return new LauncherDelegate();
+//        return new LauncherDelegate();
+        return new EcMainDelegate();
     }
 
     @Override

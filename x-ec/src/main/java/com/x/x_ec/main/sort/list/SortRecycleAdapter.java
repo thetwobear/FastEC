@@ -6,9 +6,9 @@ import android.view.View;
 
 import com.x.x_core.delegates.XDelegate;
 import com.x.x_core.ui.recycler.ItemType;
-import com.x.x_core.ui.recycler.MultiRecyclerAdapter;
-import com.x.x_core.ui.recycler.MultiViewHolder;
-import com.x.x_core.ui.recycler.MultipleFileds;
+import com.x.x_core.ui.recycler.MultipleRecyclerAdapter;
+import com.x.x_core.ui.recycler.MultipleViewHolder;
+import com.x.x_core.ui.recycler.MultipleFields;
 import com.x.x_core.ui.recycler.MultipleItemEntity;
 import com.x.x_ec.R;
 import com.x.x_ec.main.sort.SortDelegate;
@@ -22,7 +22,7 @@ import me.yokeyword.fragmentation.SupportHelper;
  * Created by 熊猿猿 on 2017/8/29/029.
  */
 
-public class SortRecycleAdapter extends MultiRecyclerAdapter {
+public class SortRecycleAdapter extends MultipleRecyclerAdapter {
 
     private final SortDelegate SORT_DELEGATE;
 
@@ -37,12 +37,12 @@ public class SortRecycleAdapter extends MultiRecyclerAdapter {
     }
 
     @Override
-    protected void convert(final MultiViewHolder helper, final MultipleItemEntity item) {
+    protected void convert(final MultipleViewHolder helper, final MultipleItemEntity item) {
         super.convert(helper, item);
         switch (helper.getItemViewType()) {
             case ItemType.VERTICAL_MENU_LIST:
-                final String name = item.getField(MultipleFileds.NAME);
-                final boolean isClicked = item.getField(MultipleFileds.TAG);
+                final String name = item.getField(MultipleFields.NAME);
+                final boolean isClicked = item.getField(MultipleFields.TAG);
                 final AppCompatTextView nameTv = helper.getView(R.id.tv_vertical_item_name);
                 final View line = helper.getView(R.id.view_line);
                 final View itemView = helper.itemView;
@@ -52,14 +52,14 @@ public class SortRecycleAdapter extends MultiRecyclerAdapter {
                         final int mCurrentPosition = helper.getAdapterPosition();
                         if (mPrePosition != mCurrentPosition) {
                             //还原上一个选项
-                            getData().get(mPrePosition).setFiled(MultipleFileds.TAG, false);
+                            getData().get(mPrePosition).setFiled(MultipleFields.TAG, false);
                             notifyItemChanged(mPrePosition);
                             //更新选中的项
-                            item.setFiled(MultipleFileds.TAG, true);
+                            item.setFiled(MultipleFields.TAG, true);
                             notifyItemChanged(mCurrentPosition);
                             //替换选中角标
                             mPrePosition = mCurrentPosition;
-                            final int contentId = item.getField(MultipleFileds.ID);
+                            final int contentId = item.getField(MultipleFields.ID);
                             showContent(contentId);
                         }
                     }

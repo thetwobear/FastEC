@@ -36,7 +36,7 @@ public abstract class BaseMainDelegate extends XDelegate implements View.OnClick
     private int mIndexDelegate = 0;
     private int mClickedColor = Color.RED;
     @BindView(R2.id.main_content_layout)
-    ContentFrameLayout mainBarDeletage;
+    ContentFrameLayout mainBarDelegate;
     @BindView(R2.id.main_bar_layout)
     LinearLayoutCompat mainBar;
 

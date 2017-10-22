@@ -28,4 +28,7 @@ dependencies {
     compile project(':x-core')
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.0'
     compile project(':x-ui')
+//    compile files('libs/alipaySdk-20161222.jar')
+    //圆形图片
+    compile 'de.hdodenhof:circleimageview:2.1.0'
 }

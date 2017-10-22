@@ -28,6 +28,7 @@ public final class XCore {
     public static Context getApplicationContext() {
         return getConfigurator().getConfiguration(ConfigKeys.APPLICATION_CONTEXT);
     }
+
     public static Handler getHandler() {
         return getConfiguration(ConfigKeys.HANDLER);
     }

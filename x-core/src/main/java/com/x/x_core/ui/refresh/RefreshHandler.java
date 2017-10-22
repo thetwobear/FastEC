@@ -10,7 +10,7 @@ import com.x.x_core.app.XCore;
 import com.x.x_core.net.RestClient;
 import com.x.x_core.net.callback.ISuccess;
 import com.x.x_core.ui.recycler.DataConverter;
-import com.x.x_core.ui.recycler.MultiRecyclerAdapter;
+import com.x.x_core.ui.recycler.MultipleRecyclerAdapter;
 
 /**
  * Created by 熊猿猿 on 2017/8/27/027.
@@ -22,7 +22,7 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener, Bas
 
     private final PagingBean PAGING_BEAN;
     private final RecyclerView RECYCLE_VIEW;
-    private MultiRecyclerAdapter mAdapter = null;
+    private MultipleRecyclerAdapter mAdapter = null;
     private final DataConverter CONVERTER;
 
     private RefreshHandler(RefreshLayout swipeRefreshLayout,
@@ -66,9 +66,9 @@ public class RefreshHandler implements SwipeRefreshLayout.OnRefreshListener, Bas
                         /**
                          * CONVERTER=HonmeDataConverter
                          * CONVERTER设置数据，进行转换
-                         * MultiRecyclerAdapter.create()传入数据转换器，转换数据
+                         * MultipleRecyclerAdapter.create()传入数据转换器，转换数据
                          */
-                        mAdapter = MultiRecyclerAdapter.create(CONVERTER.setJsonData(response));
+                        mAdapter = MultipleRecyclerAdapter.create(CONVERTER.setJsonData(response));
                         mAdapter.setOnLoadMoreListener(RefreshHandler.this, RECYCLE_VIEW);
                         RECYCLE_VIEW.setAdapter(mAdapter);
                         PAGING_BEAN.addIndex();
